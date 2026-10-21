@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-df8327fc12120b9917ac.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Emprunts_materiels",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Emprunts_materiels::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Emprunts_materiels-Debug-0a28a2fb6061ee8e0949.json",
+					"name" : "Emprunts_materiels",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Emprunts_materiels_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Emprunts_materiels_autogen-Debug-8f9ec46817e959c983d8.json",
+					"name" : "Emprunts_materiels_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Emprunts_materiels_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Emprunts_materiels_autogen_timestamp_deps-Debug-b389335756cadf24df96.json",
+					"name" : "Emprunts_materiels_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug",
+		"source" : "H:/Qt project/Maka_IT"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
