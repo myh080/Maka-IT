@@ -1,10 +1,7 @@
-#ifndef TOGGLESWITCH_H
-#define TOGGLESWITCH_H
-
 #pragma once
 
 #include <QAbstractButton>
-#include <QVariantAnimation>
+#include <QTimer>
 
 class ToggleSwitch : public QAbstractButton
 {
@@ -18,8 +15,9 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
-    QVariantAnimation m_anim;
-    double m_pos = 0.0;   // 0 = bulle à gauche, 1 = bulle à droite
-};
+    void step();
 
-#endif // TOGGLESWITCH_H
+    QTimer m_timer;          // pilote le glissement de la bulle
+    double m_pos = 0.0;      // position actuelle : 0 = gauche, 1 = droite
+    double m_target = 0.0;   // position visée
+};

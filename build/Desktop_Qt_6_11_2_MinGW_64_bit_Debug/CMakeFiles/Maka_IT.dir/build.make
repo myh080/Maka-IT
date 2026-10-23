@@ -68,11 +68,18 @@ include CMakeFiles/Maka_IT.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Maka_IT.dir/flags.make
 
+Maka_IT_autogen/timestamp: C:/Qt/6.11.2/mingw_64/bin/moc.exe
+Maka_IT_autogen/timestamp: C:/Qt/6.11.2/mingw_64/bin/uic.exe
+Maka_IT_autogen/timestamp: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target Maka_IT"
+	C:\Qt\Tools\CMake_64\bin\cmake.exe -E cmake_autogen "H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/Maka_IT_autogen.dir/AutogenInfo.json" Debug
+	C:\Qt\Tools\CMake_64\bin\cmake.exe -E touch "H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autogen/timestamp"
+
 CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
 CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
 CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj: Maka_IT_autogen/mocs_compilation.cpp
 CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj -MF CMakeFiles\Maka_IT.dir\Maka_IT_autogen\mocs_compilation.cpp.obj.d -o CMakeFiles\Maka_IT.dir\Maka_IT_autogen\mocs_compilation.cpp.obj -c "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\Maka_IT_autogen\mocs_compilation.cpp"
 
 CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.i: cmake_force
@@ -87,7 +94,7 @@ CMakeFiles/Maka_IT.dir/main.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
 CMakeFiles/Maka_IT.dir/main.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
 CMakeFiles/Maka_IT.dir/main.cpp.obj: H:/Qt\ project/Maka_IT/main.cpp
 CMakeFiles/Maka_IT.dir/main.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Maka_IT.dir/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Maka_IT.dir/main.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/main.cpp.obj -MF CMakeFiles\Maka_IT.dir\main.cpp.obj.d -o CMakeFiles\Maka_IT.dir\main.cpp.obj -c "H:\Qt project\Maka_IT\main.cpp"
 
 CMakeFiles/Maka_IT.dir/main.cpp.i: cmake_force
@@ -102,7 +109,7 @@ CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
 CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
 CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: H:/Qt\ project/Maka_IT/mainwindow.cpp
 CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj -MF CMakeFiles\Maka_IT.dir\mainwindow.cpp.obj.d -o CMakeFiles\Maka_IT.dir\mainwindow.cpp.obj -c "H:\Qt project\Maka_IT\mainwindow.cpp"
 
 CMakeFiles/Maka_IT.dir/mainwindow.cpp.i: cmake_force
@@ -117,7 +124,7 @@ CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
 CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
 CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj: H:/Qt\ project/Maka_IT/zoombackground.cpp
 CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj -MF CMakeFiles\Maka_IT.dir\zoombackground.cpp.obj.d -o CMakeFiles\Maka_IT.dir\zoombackground.cpp.obj -c "H:\Qt project\Maka_IT\zoombackground.cpp"
 
 CMakeFiles/Maka_IT.dir/zoombackground.cpp.i: cmake_force
@@ -128,12 +135,92 @@ CMakeFiles/Maka_IT.dir/zoombackground.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/zoombackground.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\zoombackground.cpp" -o CMakeFiles\Maka_IT.dir\zoombackground.cpp.s
 
+CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
+CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
+CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj: H:/Qt\ project/Maka_IT/toggleswitch.cpp
+CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj -MF CMakeFiles\Maka_IT.dir\toggleswitch.cpp.obj.d -o CMakeFiles\Maka_IT.dir\toggleswitch.cpp.obj -c "H:\Qt project\Maka_IT\toggleswitch.cpp"
+
+CMakeFiles/Maka_IT.dir/toggleswitch.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Maka_IT.dir/toggleswitch.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "H:\Qt project\Maka_IT\toggleswitch.cpp" > CMakeFiles\Maka_IT.dir\toggleswitch.cpp.i
+
+CMakeFiles/Maka_IT.dir/toggleswitch.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/toggleswitch.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\toggleswitch.cpp" -o CMakeFiles\Maka_IT.dir\toggleswitch.cpp.s
+
+CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
+CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
+CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: H:/Qt\ project/Maka_IT/materielspage.cpp
+CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Maka_IT.dir/materielspage.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/materielspage.cpp.obj -MF CMakeFiles\Maka_IT.dir\materielspage.cpp.obj.d -o CMakeFiles\Maka_IT.dir\materielspage.cpp.obj -c "H:\Qt project\Maka_IT\materielspage.cpp"
+
+CMakeFiles/Maka_IT.dir/materielspage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Maka_IT.dir/materielspage.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "H:\Qt project\Maka_IT\materielspage.cpp" > CMakeFiles\Maka_IT.dir\materielspage.cpp.i
+
+CMakeFiles/Maka_IT.dir/materielspage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/materielspage.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\materielspage.cpp" -o CMakeFiles\Maka_IT.dir\materielspage.cpp.s
+
+CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
+CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
+CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: H:/Qt\ project/Maka_IT/addmaterieldialog.cpp
+CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj -MF CMakeFiles\Maka_IT.dir\addmaterieldialog.cpp.obj.d -o CMakeFiles\Maka_IT.dir\addmaterieldialog.cpp.obj -c "H:\Qt project\Maka_IT\addmaterieldialog.cpp"
+
+CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "H:\Qt project\Maka_IT\addmaterieldialog.cpp" > CMakeFiles\Maka_IT.dir\addmaterieldialog.cpp.i
+
+CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\addmaterieldialog.cpp" -o CMakeFiles\Maka_IT.dir\addmaterieldialog.cpp.s
+
+CMakeFiles/Maka_IT.dir/datastore.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
+CMakeFiles/Maka_IT.dir/datastore.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
+CMakeFiles/Maka_IT.dir/datastore.cpp.obj: H:/Qt\ project/Maka_IT/datastore.cpp
+CMakeFiles/Maka_IT.dir/datastore.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Maka_IT.dir/datastore.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/datastore.cpp.obj -MF CMakeFiles\Maka_IT.dir\datastore.cpp.obj.d -o CMakeFiles\Maka_IT.dir\datastore.cpp.obj -c "H:\Qt project\Maka_IT\datastore.cpp"
+
+CMakeFiles/Maka_IT.dir/datastore.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Maka_IT.dir/datastore.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "H:\Qt project\Maka_IT\datastore.cpp" > CMakeFiles\Maka_IT.dir\datastore.cpp.i
+
+CMakeFiles/Maka_IT.dir/datastore.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/datastore.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\datastore.cpp" -o CMakeFiles\Maka_IT.dir\datastore.cpp.s
+
+CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
+CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
+CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj: H:/Qt\ project/Maka_IT/empruntspage.cpp
+CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj -MF CMakeFiles\Maka_IT.dir\empruntspage.cpp.obj.d -o CMakeFiles\Maka_IT.dir\empruntspage.cpp.obj -c "H:\Qt project\Maka_IT\empruntspage.cpp"
+
+CMakeFiles/Maka_IT.dir/empruntspage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Maka_IT.dir/empruntspage.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "H:\Qt project\Maka_IT\empruntspage.cpp" > CMakeFiles\Maka_IT.dir\empruntspage.cpp.i
+
+CMakeFiles/Maka_IT.dir/empruntspage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/empruntspage.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\empruntspage.cpp" -o CMakeFiles\Maka_IT.dir\empruntspage.cpp.s
+
 # Object files for target Maka_IT
 Maka_IT_OBJECTS = \
 "CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj" \
 "CMakeFiles/Maka_IT.dir/main.cpp.obj" \
 "CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj" \
-"CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj"
+"CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj" \
+"CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj" \
+"CMakeFiles/Maka_IT.dir/materielspage.cpp.obj" \
+"CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj" \
+"CMakeFiles/Maka_IT.dir/datastore.cpp.obj" \
+"CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj"
 
 # External object files for target Maka_IT
 Maka_IT_EXTERNAL_OBJECTS =
@@ -142,16 +229,19 @@ Maka_IT.exe: CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/main.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj
+Maka_IT.exe: CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj
+Maka_IT.exe: CMakeFiles/Maka_IT.dir/materielspage.cpp.obj
+Maka_IT.exe: CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj
+Maka_IT.exe: CMakeFiles/Maka_IT.dir/datastore.cpp.obj
+Maka_IT.exe: CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/build.make
 Maka_IT.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Widgets.a
 Maka_IT.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Gui.a
 Maka_IT.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Core.a
-Maka_IT.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6EntryPoint.a
-Maka_IT.exe: Maka_IT.exe.manifest
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/linkLibs.rsp
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/objects1.rsp
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Maka_IT.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable Maka_IT.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Maka_IT.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -162,7 +252,7 @@ CMakeFiles/Maka_IT.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles\Maka_IT.dir\cmake_clean.cmake
 .PHONY : CMakeFiles/Maka_IT.dir/clean
 
-CMakeFiles/Maka_IT.dir/depend:
+CMakeFiles/Maka_IT.dir/depend: Maka_IT_autogen/timestamp
 	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "H:\Qt project\Maka_IT" "H:\Qt project\Maka_IT" "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug" "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug" "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles\Maka_IT.dir\DependInfo.cmake" "--color=$(COLOR)"
 .PHONY : CMakeFiles/Maka_IT.dir/depend
 

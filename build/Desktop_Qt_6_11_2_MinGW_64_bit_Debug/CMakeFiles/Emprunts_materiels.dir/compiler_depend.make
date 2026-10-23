@@ -819,6 +819,12 @@ CMakeFiles/Emprunts_materiels.dir/main.cpp.obj: H:/Qt\ project/Maka_IT/main.cpp 
   H:/Qt\ project/Maka_IT/zoombackground.h
 
 CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.obj: H:/Qt\ project/Maka_IT/mainwindow.cpp \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QDebug \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QObject \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QRect \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QSize \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF \
   C:/Qt/6.11.2/mingw_64/include/QtCore/QVariant \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q20bit.h \
@@ -878,6 +884,7 @@ CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.obj: H:/Qt\ project/Maka_IT/mai
   C:/Qt/6.11.2/mingw_64/include/QtCore/qglobalstatic.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qhash.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qhashfunctions.h \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevice.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevicebase.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qiterable.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qiterator.h \
@@ -951,17 +958,26 @@ CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.obj: H:/Qt\ project/Maka_IT/mai
   C:/Qt/6.11.2/mingw_64/include/QtCore/qtversionchecks.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qtypeinfo.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qtypes.h \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/qurl.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qutf8stringview.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qvarlengtharray.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/QIcon \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/QPaintEvent \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/QPainter \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/QPixmap \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/QResizeEvent \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qaction.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qbitmap.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qbrush.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qcursor.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qfont.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qfontinfo.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qfontmetrics.h \
@@ -970,31 +986,53 @@ CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.obj: H:/Qt\ project/Maka_IT/mai
   C:/Qt/6.11.2/mingw_64/include/QtGui/qguiapplication_platform.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qicon.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qimage.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qinputdevice.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qinputmethod.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qpaintdevice.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qpainter.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qpalette.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qpicture.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qpixelformat.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qpixmap.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qpointingdevice.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qpolygon.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qregion.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qrgb.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qrgba64.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qtextdocument.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qtextoption.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qtgui-config.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qtguiexports.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qtguiglobal.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qtransform.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qvector2d.h \
+  C:/Qt/6.11.2/mingw_64/include/QtGui/qvectornd.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.2/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/QApplication \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QLabel \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMenuBar \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QPushButton \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/QStatusBar \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QVBoxLayout \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/QWidget \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractbutton.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/qapplication.h \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qboxlayout.h \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qframe.h \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgridlayout.h \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlabel.h \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlayout.h \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlayoutitem.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmenu.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmenubar.h \
+  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qpushbutton.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/qsizepolicy.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstatusbar.h \
   C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtabwidget.h \
@@ -2470,6 +2508,8 @@ C:/Qt/6.11.2/mingw_64/include/QtCore/qtconfigmacros.h:
 
 C:/Qt/6.11.2/mingw_64/include/QtCore/qtcore-config.h:
 
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/qpushbutton.h:
+
 C:/Qt/6.11.2/mingw_64/include/QtCore/qtcoreexports.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h:
@@ -2632,6 +2672,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allo
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocated_ptr.h:
 
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/QPushButton:
+
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allocator.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/basic_string.h:
@@ -2675,6 +2717,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/loca
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/memoryfwd.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/move.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qpicture.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_raw_storage_iter.h:
 
@@ -2741,6 +2785,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_iterator_base_types.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_list.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/QPaintEvent:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multimap.h:
 
@@ -2924,6 +2970,8 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/_mingw_secapi.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/assert.h:
 
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlabel.h:
+
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/corecrt.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/corecrt_startup.h:
@@ -2931,6 +2979,8 @@ C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/corecrt_startup.h:
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/corecrt_stdio_config.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/crtdefs.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qtextdocument.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/stdlib.h:
 
@@ -2978,9 +3028,55 @@ C:/Qt/6.11.2/mingw_64/include/QtGui/qinputmethod.h:
 
 C:/Qt/6.11.2/mingw_64/include/QtWidgets/qapplication.h:
 
+C:/Qt/6.11.2/mingw_64/include/QtCore/QDebug:
+
+C:/Qt/6.11.2/mingw_64/include/QtCore/QList:
+
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlayout.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtCore/QRect:
+
+C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF:
+
 C:/Qt/6.11.2/mingw_64/include/QtCore/QVariant:
 
+C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevice.h:
+
+C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/random:
+
+C:/Qt/6.11.2/mingw_64/include/QtCore/qurl.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/QIcon:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/QResizeEvent:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qinputdevice.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qpointingdevice.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtGui/qtextoption.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/QLabel:
+
 C:/Qt/6.11.2/mingw_64/include/QtWidgets/QStatusBar:
+
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/QVBoxLayout:
+
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/qboxlayout.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/qframe.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgridlayout.h:
+
+C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlayoutitem.h:
 
 C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmenubar.h:
 
@@ -2992,35 +3088,7 @@ C:/Qt/6.11.2/mingw_64/include/QtGui/QPainterPath:
 
 C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h:
 
-C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h:
-
-C:/Qt/6.11.2/mingw_64/include/QtGui/qtextoption.h:
-
-C:/Qt/6.11.2/mingw_64/include/QtCore/QList:
-
-C:/Qt/6.11.2/mingw_64/include/QtCore/QRect:
-
-C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF:
-
-C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevice.h:
-
-C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/random:
-
-C:/Qt/6.11.2/mingw_64/include/QtCore/qurl.h:
-
 C:/Qt/6.11.2/mingw_64/include/QtGui/QFontMetrics:
-
-C:/Qt/6.11.2/mingw_64/include/QtGui/QResizeEvent:
-
-C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform:
-
-C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h:
-
-C:/Qt/6.11.2/mingw_64/include/QtGui/qinputdevice.h:
-
-C:/Qt/6.11.2/mingw_64/include/QtGui/qpointingdevice.h:
-
-C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h:
 
 C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsOpacityEffect:
 

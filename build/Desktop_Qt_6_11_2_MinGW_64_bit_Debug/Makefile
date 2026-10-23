@@ -84,51 +84,6 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-.PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	C:\Qt\Tools\CMake_64\bin\cmake.exe -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
-	C:\Qt\Tools\CMake_64\bin\cmake.exe -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	C:\Qt\Tools\CMake_64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
-	C:\Qt\Tools\CMake_64\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	C:\Qt\Tools\CMake_64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
-	C:\Qt\Tools\CMake_64\bin\cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\\CMakeFiles\progress.marks"
@@ -161,74 +116,146 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Emprunts_materiels
+# Target rules for targets named Maka_IT
 
 # Build rule for target.
-Emprunts_materiels: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Emprunts_materiels
-.PHONY : Emprunts_materiels
+Maka_IT: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Maka_IT
+.PHONY : Maka_IT
 
 # fast build rule for target.
-Emprunts_materiels/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/build
-.PHONY : Emprunts_materiels/fast
+Maka_IT/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/build
+.PHONY : Maka_IT/fast
 
 #=============================================================================
-# Target rules for targets named Emprunts_materiels_autogen_timestamp_deps
+# Target rules for targets named Maka_IT_autogen_timestamp_deps
 
 # Build rule for target.
-Emprunts_materiels_autogen_timestamp_deps: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Emprunts_materiels_autogen_timestamp_deps
-.PHONY : Emprunts_materiels_autogen_timestamp_deps
+Maka_IT_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Maka_IT_autogen_timestamp_deps
+.PHONY : Maka_IT_autogen_timestamp_deps
 
 # fast build rule for target.
-Emprunts_materiels_autogen_timestamp_deps/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels_autogen_timestamp_deps.dir\build.make CMakeFiles/Emprunts_materiels_autogen_timestamp_deps.dir/build
-.PHONY : Emprunts_materiels_autogen_timestamp_deps/fast
+Maka_IT_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT_autogen_timestamp_deps.dir\build.make CMakeFiles/Maka_IT_autogen_timestamp_deps.dir/build
+.PHONY : Maka_IT_autogen_timestamp_deps/fast
 
 #=============================================================================
-# Target rules for targets named Emprunts_materiels_autogen
+# Target rules for targets named Maka_IT_autogen
 
 # Build rule for target.
-Emprunts_materiels_autogen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Emprunts_materiels_autogen
-.PHONY : Emprunts_materiels_autogen
+Maka_IT_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 Maka_IT_autogen
+.PHONY : Maka_IT_autogen
 
 # fast build rule for target.
-Emprunts_materiels_autogen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels_autogen.dir\build.make CMakeFiles/Emprunts_materiels_autogen.dir/build
-.PHONY : Emprunts_materiels_autogen/fast
+Maka_IT_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT_autogen.dir\build.make CMakeFiles/Maka_IT_autogen.dir/build
+.PHONY : Maka_IT_autogen/fast
 
-Emprunts_materiels_autogen/mocs_compilation.obj: Emprunts_materiels_autogen/mocs_compilation.cpp.obj
-.PHONY : Emprunts_materiels_autogen/mocs_compilation.obj
+Maka_IT_autogen/mocs_compilation.obj: Maka_IT_autogen/mocs_compilation.cpp.obj
+.PHONY : Maka_IT_autogen/mocs_compilation.obj
 
 # target to build an object file
-Emprunts_materiels_autogen/mocs_compilation.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/Emprunts_materiels_autogen/mocs_compilation.cpp.obj
-.PHONY : Emprunts_materiels_autogen/mocs_compilation.cpp.obj
+Maka_IT_autogen/mocs_compilation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj
+.PHONY : Maka_IT_autogen/mocs_compilation.cpp.obj
 
-Emprunts_materiels_autogen/mocs_compilation.i: Emprunts_materiels_autogen/mocs_compilation.cpp.i
-.PHONY : Emprunts_materiels_autogen/mocs_compilation.i
+Maka_IT_autogen/mocs_compilation.i: Maka_IT_autogen/mocs_compilation.cpp.i
+.PHONY : Maka_IT_autogen/mocs_compilation.i
 
 # target to preprocess a source file
-Emprunts_materiels_autogen/mocs_compilation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/Emprunts_materiels_autogen/mocs_compilation.cpp.i
-.PHONY : Emprunts_materiels_autogen/mocs_compilation.cpp.i
+Maka_IT_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.i
+.PHONY : Maka_IT_autogen/mocs_compilation.cpp.i
 
-Emprunts_materiels_autogen/mocs_compilation.s: Emprunts_materiels_autogen/mocs_compilation.cpp.s
-.PHONY : Emprunts_materiels_autogen/mocs_compilation.s
+Maka_IT_autogen/mocs_compilation.s: Maka_IT_autogen/mocs_compilation.cpp.s
+.PHONY : Maka_IT_autogen/mocs_compilation.s
 
 # target to generate assembly for a file
-Emprunts_materiels_autogen/mocs_compilation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/Emprunts_materiels_autogen/mocs_compilation.cpp.s
-.PHONY : Emprunts_materiels_autogen/mocs_compilation.cpp.s
+Maka_IT_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.s
+.PHONY : Maka_IT_autogen/mocs_compilation.cpp.s
+
+addmaterieldialog.obj: addmaterieldialog.cpp.obj
+.PHONY : addmaterieldialog.obj
+
+# target to build an object file
+addmaterieldialog.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj
+.PHONY : addmaterieldialog.cpp.obj
+
+addmaterieldialog.i: addmaterieldialog.cpp.i
+.PHONY : addmaterieldialog.i
+
+# target to preprocess a source file
+addmaterieldialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.i
+.PHONY : addmaterieldialog.cpp.i
+
+addmaterieldialog.s: addmaterieldialog.cpp.s
+.PHONY : addmaterieldialog.s
+
+# target to generate assembly for a file
+addmaterieldialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.s
+.PHONY : addmaterieldialog.cpp.s
+
+datastore.obj: datastore.cpp.obj
+.PHONY : datastore.obj
+
+# target to build an object file
+datastore.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/datastore.cpp.obj
+.PHONY : datastore.cpp.obj
+
+datastore.i: datastore.cpp.i
+.PHONY : datastore.i
+
+# target to preprocess a source file
+datastore.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/datastore.cpp.i
+.PHONY : datastore.cpp.i
+
+datastore.s: datastore.cpp.s
+.PHONY : datastore.s
+
+# target to generate assembly for a file
+datastore.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/datastore.cpp.s
+.PHONY : datastore.cpp.s
+
+empruntspage.obj: empruntspage.cpp.obj
+.PHONY : empruntspage.obj
+
+# target to build an object file
+empruntspage.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj
+.PHONY : empruntspage.cpp.obj
+
+empruntspage.i: empruntspage.cpp.i
+.PHONY : empruntspage.i
+
+# target to preprocess a source file
+empruntspage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/empruntspage.cpp.i
+.PHONY : empruntspage.cpp.i
+
+empruntspage.s: empruntspage.cpp.s
+.PHONY : empruntspage.s
+
+# target to generate assembly for a file
+empruntspage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/empruntspage.cpp.s
+.PHONY : empruntspage.cpp.s
 
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
 # target to build an object file
 main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/main.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/main.cpp.obj
 .PHONY : main.cpp.obj
 
 main.i: main.cpp.i
@@ -236,7 +263,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -244,7 +271,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 mainwindow.obj: mainwindow.cpp.obj
@@ -252,7 +279,7 @@ mainwindow.obj: mainwindow.cpp.obj
 
 # target to build an object file
 mainwindow.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj
 .PHONY : mainwindow.cpp.obj
 
 mainwindow.i: mainwindow.cpp.i
@@ -260,7 +287,7 @@ mainwindow.i: mainwindow.cpp.i
 
 # target to preprocess a source file
 mainwindow.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/mainwindow.cpp.i
 .PHONY : mainwindow.cpp.i
 
 mainwindow.s: mainwindow.cpp.s
@@ -268,15 +295,39 @@ mainwindow.s: mainwindow.cpp.s
 
 # target to generate assembly for a file
 mainwindow.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
+
+materielspage.obj: materielspage.cpp.obj
+.PHONY : materielspage.obj
+
+# target to build an object file
+materielspage.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/materielspage.cpp.obj
+.PHONY : materielspage.cpp.obj
+
+materielspage.i: materielspage.cpp.i
+.PHONY : materielspage.i
+
+# target to preprocess a source file
+materielspage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/materielspage.cpp.i
+.PHONY : materielspage.cpp.i
+
+materielspage.s: materielspage.cpp.s
+.PHONY : materielspage.s
+
+# target to generate assembly for a file
+materielspage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/materielspage.cpp.s
+.PHONY : materielspage.cpp.s
 
 toggleswitch.obj: toggleswitch.cpp.obj
 .PHONY : toggleswitch.obj
 
 # target to build an object file
 toggleswitch.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/toggleswitch.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj
 .PHONY : toggleswitch.cpp.obj
 
 toggleswitch.i: toggleswitch.cpp.i
@@ -284,7 +335,7 @@ toggleswitch.i: toggleswitch.cpp.i
 
 # target to preprocess a source file
 toggleswitch.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/toggleswitch.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/toggleswitch.cpp.i
 .PHONY : toggleswitch.cpp.i
 
 toggleswitch.s: toggleswitch.cpp.s
@@ -292,7 +343,7 @@ toggleswitch.s: toggleswitch.cpp.s
 
 # target to generate assembly for a file
 toggleswitch.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/toggleswitch.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/toggleswitch.cpp.s
 .PHONY : toggleswitch.cpp.s
 
 zoombackground.obj: zoombackground.cpp.obj
@@ -300,7 +351,7 @@ zoombackground.obj: zoombackground.cpp.obj
 
 # target to build an object file
 zoombackground.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/zoombackground.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj
 .PHONY : zoombackground.cpp.obj
 
 zoombackground.i: zoombackground.cpp.i
@@ -308,7 +359,7 @@ zoombackground.i: zoombackground.cpp.i
 
 # target to preprocess a source file
 zoombackground.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/zoombackground.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/zoombackground.cpp.i
 .PHONY : zoombackground.cpp.i
 
 zoombackground.s: zoombackground.cpp.s
@@ -316,7 +367,7 @@ zoombackground.s: zoombackground.cpp.s
 
 # target to generate assembly for a file
 zoombackground.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Emprunts_materiels.dir\build.make CMakeFiles/Emprunts_materiels.dir/zoombackground.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/zoombackground.cpp.s
 .PHONY : zoombackground.cpp.s
 
 # Help Target
@@ -326,23 +377,31 @@ help:
 	@echo ... clean
 	@echo ... depend
 	@echo ... edit_cache
-	@echo ... install
-	@echo ... install/local
-	@echo ... install/strip
-	@echo ... list_install_components
 	@echo ... rebuild_cache
-	@echo ... Emprunts_materiels_autogen
-	@echo ... Emprunts_materiels_autogen_timestamp_deps
-	@echo ... Emprunts_materiels
-	@echo ... Emprunts_materiels_autogen/mocs_compilation.obj
-	@echo ... Emprunts_materiels_autogen/mocs_compilation.i
-	@echo ... Emprunts_materiels_autogen/mocs_compilation.s
+	@echo ... Maka_IT_autogen
+	@echo ... Maka_IT_autogen_timestamp_deps
+	@echo ... Maka_IT
+	@echo ... Maka_IT_autogen/mocs_compilation.obj
+	@echo ... Maka_IT_autogen/mocs_compilation.i
+	@echo ... Maka_IT_autogen/mocs_compilation.s
+	@echo ... addmaterieldialog.obj
+	@echo ... addmaterieldialog.i
+	@echo ... addmaterieldialog.s
+	@echo ... datastore.obj
+	@echo ... datastore.i
+	@echo ... datastore.s
+	@echo ... empruntspage.obj
+	@echo ... empruntspage.i
+	@echo ... empruntspage.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
 	@echo ... mainwindow.obj
 	@echo ... mainwindow.i
 	@echo ... mainwindow.s
+	@echo ... materielspage.obj
+	@echo ... materielspage.i
+	@echo ... materielspage.s
 	@echo ... toggleswitch.obj
 	@echo ... toggleswitch.i
 	@echo ... toggleswitch.s

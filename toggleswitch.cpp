@@ -5,7 +5,7 @@
 #include <QLinearGradient>
 #include <QRadialGradient>
 #include <QFont>
-#include <QEasingCurve>
+#include <algorithm>
 
 ToggleSwitch::ToggleSwitch(QWidget *parent)
     : QAbstractButton(parent)
@@ -14,27 +14,34 @@ ToggleSwitch::ToggleSwitch(QWidget *parent)
     setCursor(Qt::PointingHandCursor);
     setFixedSize(sizeHint());
 
-    m_anim.setDuration(450);
-    m_anim.setEasingCurve(QEasingCurve::OutCubic);
+    m_timer.setInterval(16);
+    connect(&m_timer, &QTimer::timeout, this, &ToggleSwitch::step);
 
-    // Mise à jour de la position de la bulle pendant l'animation
-    connect(&m_anim, &QVariantAnimation::valueChanged, this, [this](const QVariant &v) {
-        m_pos = v.toDouble();
-        update();
-    });
-
-    // Glissement de la bulle à chaque clic
+    // À chaque clic, la bulle glisse vers la nouvelle position
     connect(this, &QAbstractButton::toggled, this, [this](bool on) {
-        m_anim.stop();
-        m_anim.setStartValue(m_pos);
-        m_anim.setEndValue(on ? 1.0 : 0.0);
-        m_anim.start();
+        m_target = on ? 1.0 : 0.0;
+        m_timer.start();
     });
 }
 
 QSize ToggleSwitch::sizeHint() const
 {
-    return QSize(110, 30);
+    return QSize(110, 30);   // modifiez ces deux valeurs pour changer la taille
+}
+
+void ToggleSwitch::step()
+{
+    const double speed = 0.08;
+
+    if (m_pos < m_target)
+        m_pos = std::min(m_target, m_pos + speed);
+    else if (m_pos > m_target)
+        m_pos = std::max(m_target, m_pos - speed);
+
+    update();
+
+    if (m_pos == m_target)
+        m_timer.stop();
 }
 
 void ToggleSwitch::paintEvent(QPaintEvent *)
@@ -49,7 +56,7 @@ void ToggleSwitch::paintEvent(QPaintEvent *)
     const double margin = h * 0.08;
     const double knobD = h - 2 * margin;
 
-    // Capsule sombre, légèrement dégradée
+    // Capsule sombre
     QLinearGradient bg(full.topLeft(), full.bottomLeft());
     bg.setColorAt(0.0, QColor(40, 40, 40));
     bg.setColorAt(1.0, QColor(12, 12, 12));
@@ -62,7 +69,7 @@ void ToggleSwitch::paintEvent(QPaintEvent *)
                          + m_pos * (full.width() - knobD - 2 * margin);
     const QRectF knob(knobX, full.top() + margin, knobD, knobD);
 
-    // Texte affiché sur le côté libre de la bulle
+    // Texte sur le côté libre de la bulle
     QFont font;
     font.setFamilies({ "Segoe UI Semibold", "Segoe UI", "Arial" });
     font.setPixelSize(static_cast<int>(h * 0.32));
@@ -76,7 +83,7 @@ void ToggleSwitch::paintEvent(QPaintEvent *)
                                 : QRectF(knob.right(), full.top(), full.right() - knob.right(), full.height());
     p.drawText(textRect, Qt::AlignCenter, text);
 
-    // Bulle en verre, avec reflet
+    // Bulle en verre
     QRadialGradient kg(knob.center() + QPointF(-knobD * 0.2, -knobD * 0.25), knobD * 0.7);
     kg.setColorAt(0.0, QColor(95, 95, 95));
     kg.setColorAt(0.6, QColor(45, 45, 45));
@@ -85,7 +92,7 @@ void ToggleSwitch::paintEvent(QPaintEvent *)
     p.setBrush(kg);
     p.drawEllipse(knob);
 
-    // Lune en croissant au centre de la bulle
+    // Lune en croissant
     const double r = knobD * 0.26;
     const QPointF c = knob.center();
 

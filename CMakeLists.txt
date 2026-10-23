@@ -1,44 +1,32 @@
-cmake_minimum_required(VERSION 3.19)
-project(Emprunts_materiels LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.16)
+project(Maka_IT LANGUAGES CXX)
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-qt_standard_project_setup()
-
-qt_add_executable(Emprunts_materiels
-    WIN32 MACOSX_BUNDLE
+add_executable(Maka_IT
     main.cpp
     mainwindow.cpp
     mainwindow.h
-
-
+    mainwindow.ui
     zoombackground.h
     zoombackground.cpp
-    mainwindow.h
-    mainwindow.cpp
-    mainwindow.ui
     toggleswitch.h
     toggleswitch.cpp
+    materielspage.h
+    materielspage.cpp
+    addmaterieldialog.h addmaterieldialog.cpp
+    datastore.h datastore.cpp
+    empruntspage.h empruntspage.cpp
+
+
+
+
 )
 
-target_link_libraries(Emprunts_materiels
-    PRIVATE
-        Qt::Core
-        Qt::Widgets
-)
-
-install(TARGETS Emprunts_materiels
-    BUNDLE  DESTINATION .
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-)
-
-qt_generate_deploy_app_script(
-    TARGET Emprunts_materiels
-    OUTPUT_SCRIPT deploy_script
-    NO_UNSUPPORTED_PLATFORM_ERROR
-)
-install(SCRIPT ${deploy_script})
+target_link_libraries(Maka_IT PRIVATE Qt6::Widgets)

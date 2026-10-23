@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>typo.jpg</file>
+        <file>boite-de-retour.png</file>
+        <file>etudiant.png</file>
+        <file>lanalyse-des-donnees.png</file>
+        <file>ordinateur-personnel.png</file>
+    </qresource>
+</RCC>

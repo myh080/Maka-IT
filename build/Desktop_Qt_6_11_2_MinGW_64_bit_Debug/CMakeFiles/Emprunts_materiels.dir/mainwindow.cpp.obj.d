@@ -386,8 +386,10 @@ CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtabwidget.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QPixmap \
  H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Emprunts_materiels_autogen/include/ui_mainwindow.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QVariant \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QIcon \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QApplication \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qapplication.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qcoreapplication.h \
@@ -402,10 +404,46 @@ CMakeFiles/Emprunts_materiels.dir/mainwindow.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qinputmethod.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qlocale.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QLabel \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlabel.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qframe.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpicture.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qtextdocument.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qurl.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMainWindow \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMenuBar \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmenubar.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmenu.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QPushButton \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qpushbutton.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractbutton.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QStatusBar \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstatusbar.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QWidget
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QVBoxLayout \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qboxlayout.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlayout.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgridlayout.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QWidget \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QPainter \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpainter.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qtextoption.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QPaintEvent \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvector2d.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvectornd.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpointingdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qinputdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QRect \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSize \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QResizeEvent \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QDebug
