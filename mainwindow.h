@@ -14,6 +14,7 @@ class QPushButton;
 class QResizeEvent;
 class DataStore;
 class EmpruntsPage;
+class QEvent;
 
 class MainWindow : public QMainWindow
 {
@@ -25,6 +26,7 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent *event) override;
+        bool eventFilter(QObject *obj, QEvent *ev) override;
 
 private slots:
     void setDashboardVisible(bool show);

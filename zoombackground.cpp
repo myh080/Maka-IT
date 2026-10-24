@@ -20,6 +20,7 @@ constexpr double ZOOM_PER_NOTCH = 1.1;    // chaque cran multiplie la taille par
 constexpr int    MAX_NOTCHES    = 26;     // 1.1^26 ≈ 11.9, donc on reste sous MAX_ZOOM
 constexpr int    DASHBOARD_AT   = 4;      // le tableau de bord apparaît au 4e cran
 constexpr double FADE_SPEED     = 0.12;   // vitesse des fondus (0 à 1)
+constexpr int    MAP_NOTCH    = 3;      // cran à partir duquel la carte est affichée
 }
 
 ZoomBackground::ZoomBackground(QWidget *parent)
@@ -59,13 +60,21 @@ void ZoomBackground::step()
 
 void ZoomBackground::setNotches(int notches)
 {
-    m_notches = std::clamp(notches, 0, MAX_NOTCHES);
+    notches = std::clamp(notches, 0, MAX_NOTCHES);
+
+    // Une fois la carte affichée, on ne peut plus revenir à la sphère
+    if (notches >= MAP_NOTCH)
+        m_mapReached = true;
+    if (m_mapReached && notches < MAP_NOTCH)
+        notches = MAP_NOTCH;
+
+    m_notches = notches;
     m_zoom = std::min(MAX_ZOOM, std::pow(ZOOM_PER_NOTCH, m_notches));
 
-    const bool show = m_notches >= DASHBOARD_AT;
-    if (show != m_dashShown) {
-        m_dashShown = show;
-        emit dashboardVisible(show);
+    // Une fois le tableau de bord affiché, il ne disparaît plus
+    if (!m_dashShown && m_notches >= DASHBOARD_AT) {
+        m_dashShown = true;
+        emit dashboardVisible(true);
     }
 }
 
@@ -77,7 +86,7 @@ void ZoomBackground::setMapImage(const QString &path)
 
     img = img.convertToFormat(QImage::Format_RGB32);
 
-    // Assombrit les océans (pixels sombres), les continents restent lumineux
+    // Mode sombre : océans assombris, continents lumineux
     for (int y = 0; y < img.height(); ++y) {
         QRgb *line = reinterpret_cast<QRgb *>(img.scanLine(y));
         for (int x = 0; x < img.width(); ++x) {
@@ -92,9 +101,25 @@ void ZoomBackground::setMapImage(const QString &path)
 
     m_map = QPixmap::fromImage(img);
 
-    QImage inv = img;
-    inv.invertPixels(QImage::InvertRgb);
-    m_mapInverted = QPixmap::fromImage(inv);
+    // Mode clair : version inversée, puis les blancs sont ramenés vers un gris moyen
+    QImage light = img;
+    light.invertPixels(QImage::InvertRgb);
+
+    // Les valeurs claires deviennent grises (plafond à 150), les sombres restent sombres
+    const int GREY_MAX = 150;
+    auto toGrey = [GREY_MAX](int v) {
+        return qRound(GREY_MAX * std::pow(v / 255.0, 1.6));
+    };
+
+    for (int y = 0; y < light.height(); ++y) {
+        QRgb *line = reinterpret_cast<QRgb *>(light.scanLine(y));
+        for (int x = 0; x < light.width(); ++x) {
+            const QRgb c = line[x];
+            line[x] = qRgb(toGrey(qRed(c)), toGrey(qGreen(c)), toGrey(qBlue(c)));
+        }
+    }
+
+    m_mapInverted = QPixmap::fromImage(light);
     update();
 }
 
@@ -115,8 +140,7 @@ void ZoomBackground::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setRenderHint(QPainter::TextAntialiasing);
-    painter.fillRect(rect(), m_inverted ? Qt::white : Qt::black);
-
+    painter.fillRect(rect(), m_inverted ? QColor("#e5e7eb") : Qt::black);
     if (m_mapAlpha < 1.0) {
         painter.setOpacity(1.0 - m_mapAlpha);
         drawSphere(painter);
@@ -166,7 +190,11 @@ void ZoomBackground::drawSphere(QPainter &painter)
 
 void ZoomBackground::drawMap(QPainter &painter)
 {
-    const QPixmap &pix = m_inverted ? m_mapInverted : m_map;
+    // En mode clair, on n'affiche pas la carte : le fond gris suffit
+    if (m_inverted)
+        return;
+
+    const QPixmap &pix = m_map;
     if (pix.isNull())
         return;
 

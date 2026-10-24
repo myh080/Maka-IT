@@ -2,9 +2,10 @@
 
 #include <QWidget>
 #include <QList>
-#include <QStringList>
+#include "datastore.h"
 
 class QEvent;
+class QShowEvent;
 class QFrame;
 class QGridLayout;
 class QLineEdit;
@@ -15,37 +16,29 @@ class MaterielsPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit MaterielsPage(QWidget *parent = nullptr);
+    explicit MaterielsPage(DataStore *store, QWidget *parent = nullptr);
 
 signals:
-    // Émis quand l'utilisateur confirme vouloir emprunter un matériel disponible
-    void emprunterRequested(const QString &name);
+    void emprunterRequested(const QString &designation);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev) override;
+    void showEvent(QShowEvent *event) override;
 
 private:
-    struct Item {
-        QString name;
-        QString serial;
-        QString category;
-        int status;      // 0 = disponible, 1 = emprunté, 2 = endommagé
-        QString photo;   // chemin de l'image, vide si aucune
-    };
-
-    void addItem(const Item &it);
-    QFrame *makeCard(const Item &it, int index);
-    void rebuildCategories();
-    void updateCatSelection(int row);
-    void refresh();
-    void onAddClicked();
+    void loadCategories();
+    void selectCategory(int row);
+    void loadMaterials();
+    QFrame *makeCard(const MaterialRow &row, int index);
     void onCardDoubleClicked(int index);
+    void onAddClicked();
 
-    QList<Item> m_items;
-    QList<QFrame *> m_cards;
+    DataStore *m_store = nullptr;
+    QList<Category> m_categories;      // « Tous » en premier
     QList<QFrame *> m_catRows;
-    QStringList m_catNames;
-    QString m_currentCat = "Tous";
+    QList<MaterialRow> m_rows;
+    QList<QFrame *> m_cards;
+    int m_currentCat = 0;
 
     QLineEdit *m_search = nullptr;
     QListWidget *m_cats = nullptr;

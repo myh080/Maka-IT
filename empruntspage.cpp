@@ -12,41 +12,6 @@
 
 namespace {
 
-const char *PAGE_QSS = R"CSS(
-QLabel { background: transparent; color: #e5e7eb; }
-QLabel#title { font-size: 24px; font-weight: bold; color: white; }
-QLabel#subtitle { font-size: 12px; color: #94a3b8; }
-QLabel#formTitle { font-size: 16px; font-weight: bold; color: white; }
-QLabel#field { font-size: 12px; color: #cbd5e1; }
-QLabel#done { font-size: 15px; font-weight: bold; color: #4ade80; }
-
-QFrame#form, QFrame#summary {
-    background-color: rgba(10, 10, 14, 190);
-    border: 1px solid rgba(56, 189, 248, 80);
-    border-radius: 14px;
-}
-QFrame#summary { border: 1px solid #4ade80; }
-
-QLineEdit, QDateEdit {
-    background-color: rgba(255, 255, 255, 15);
-    border: 1px solid rgba(56, 189, 248, 90);
-    border-radius: 8px;
-    padding: 7px 10px;
-    color: white;
-}
-QLineEdit:focus, QDateEdit:focus { border: 1px solid #38bdf8; }
-
-QPushButton#primary {
-    background-color: rgba(56, 189, 248, 70);
-    color: white;
-    border: 1px solid #38bdf8;
-    border-radius: 8px;
-    padding: 9px 14px;
-    font-weight: bold;
-}
-QPushButton#primary:hover { background-color: rgba(56, 189, 248, 120); }
-)CSS";
-
 QLabel *fieldLabel(const QString &text)
 {
     QLabel *l = new QLabel(text);
@@ -62,7 +27,6 @@ EmpruntsPage::EmpruntsPage(DataStore *store, QWidget *parent)
 {
     setAttribute(Qt::WA_TranslucentBackground);
     setAutoFillBackground(false);
-    setStyleSheet(PAGE_QSS);
 
     auto *root = new QVBoxLayout(this);
     root->setContentsMargins(24, 20, 24, 20);
@@ -75,13 +39,16 @@ EmpruntsPage::EmpruntsPage(DataStore *store, QWidget *parent)
     root->addWidget(title);
     root->addWidget(sub);
 
-    // ----- Formulaire -----
+    // ----- Bloc centré : formulaire puis résumé -----
+    auto *center = new QVBoxLayout;
+    center->setSpacing(14);
+
     QFrame *form = new QFrame;
     form->setObjectName("form");
-    form->setMaximumWidth(520);
+    form->setFixedWidth(420);
     auto *fl = new QVBoxLayout(form);
-    fl->setContentsMargins(22, 20, 22, 20);
-    fl->setSpacing(10);
+    fl->setContentsMargins(22, 18, 22, 18);
+    fl->setSpacing(8);
 
     QLabel *ft = new QLabel("Nouvel emprunt");
     ft->setObjectName("formTitle");
@@ -122,19 +89,19 @@ EmpruntsPage::EmpruntsPage(DataStore *store, QWidget *parent)
     ok->setObjectName("primary");
     ok->setCursor(Qt::PointingHandCursor);
     fl->addWidget(ok);
-
-    root->addWidget(form, 0, Qt::AlignTop);
     connect(ok, &QPushButton::clicked, this, &EmpruntsPage::onSubmit);
+
+    center->addWidget(form, 0, Qt::AlignHCenter);
 
     // ----- Résumé, affiché après un emprunt réussi -----
     m_summary = new QFrame;
     m_summary->setObjectName("summary");
-    m_summary->setMaximumWidth(520);
+    m_summary->setFixedWidth(420);
     m_summary->hide();
 
     auto *sl = new QVBoxLayout(m_summary);
-    sl->setContentsMargins(22, 18, 22, 18);
-    sl->setSpacing(10);
+    sl->setContentsMargins(22, 16, 22, 16);
+    sl->setSpacing(8);
 
     QLabel *done = new QLabel("✔  Emprunt terminé");
     done->setObjectName("done");
@@ -145,8 +112,11 @@ EmpruntsPage::EmpruntsPage(DataStore *store, QWidget *parent)
     m_summaryText->setWordWrap(true);
     sl->addWidget(m_summaryText);
 
-    root->addWidget(m_summary, 0, Qt::AlignTop);
-    root->addStretch();
+    center->addWidget(m_summary, 0, Qt::AlignHCenter);
+
+    root->addStretch(1);
+    root->addLayout(center);
+    root->addStretch(1);
 }
 
 void EmpruntsPage::prefillMaterial(const QString &name)
@@ -160,7 +130,7 @@ void EmpruntsPage::onSubmit()
     m_summary->hide();
 
     const QString key       = m_material->text().trimmed();
-    const QString matricule = m_matricule->text().trimmed().toUpper();
+    const QString matricule = m_matricule->text().trimmed();
     const QDate start       = m_start->date();
     const QDate end         = m_end->date();
 
@@ -177,25 +147,30 @@ void EmpruntsPage::onSubmit()
     }
 
     // 1. Le matériel existe-t-il ?
-    const Material *mat = m_store->findMaterial(key);
+    const auto mat = m_store->findMaterial(key);
     if (!mat) {
         QMessageBox::warning(this, "Matériel introuvable",
                              QString("Aucun matériel ne correspond à « %1 ».").arg(key));
         return;
     }
-    const QString materialName = mat->name;
 
-    // 2. Le matériel est-il déjà emprunté ?
-    if (m_store->isBorrowed(materialName)) {
+    // 2. Le matériel est-il disponible ?
+    if (mat->etat == "endommage") {
+        QMessageBox::warning(this, "Matériel endommagé",
+                             QString("« %1 » est endommagé et ne peut pas être emprunté.")
+                                 .arg(mat->designation));
+        return;
+    }
+    if (m_store->isBorrowed(mat->id)) {
         QMessageBox::warning(this, "Matériel déjà emprunté",
                              QString("« %1 » est déjà emprunté. Un matériel ne peut pas être "
                                      "emprunté par deux personnes en même temps.")
-                                 .arg(materialName));
+                                 .arg(mat->designation));
         return;
     }
 
     // 3. L'emprunteur est-il inscrit ?
-    const Student *st = m_store->findStudent(matricule);
+    const auto st = m_store->findStudent(matricule);
     if (!st) {
         QMessageBox::information(this, "Emprunteur non inscrit",
                                  QString("Le matricule %1 n'est pas enregistré.\n\n"
@@ -206,25 +181,41 @@ void EmpruntsPage::onSubmit()
     }
 
     // 4. A-t-il un prêt en retard ?
-    if (m_store->hasLateLoan(st->matricule)) {
+    if (m_store->hasLateLoan(st->id)) {
         QMessageBox::warning(this, "Emprunt impossible",
-                             QString("%1 %2 a un prêt en retard. Il ne peut pas effectuer "
-                                     "de nouvel emprunt tant que le matériel n'est pas rendu.")
+                             QString("%1 %2 a un prêt en retard. Il doit rendre ce matériel "
+                                     "avant de pouvoir emprunter à nouveau.")
                                  .arg(st->prenom, st->nom));
         return;
     }
 
-    // Tout est valide : on enregistre l'emprunt
-    const QString who = st->prenom + " " + st->nom;
-    const QString mat2 = st->matricule;
+    // 5. A-t-il un autre matériel non rendu ?
+    if (m_store->hasActiveLoan(st->id)) {
+        QMessageBox::warning(this, "Emprunt impossible",
+                             QString("%1 %2 a déjà un matériel non rendu. Il doit le rendre "
+                                     "avant de pouvoir emprunter autre chose.")
+                                 .arg(st->prenom, st->nom));
+        return;
+    }
 
-    m_store->addLoan(Loan{ materialName, mat2, start, end, false });
-    showSummary(materialName, who, mat2, start, end);
+    // Tout est valide : enregistrement
+    Loan loan;
+    loan.materielId       = mat->id;
+    loan.emprunteurId     = st->id;
+    loan.dateEmprunt      = start;
+    loan.dateRetourPrevue = end;
+
+    if (!m_store->addLoan(loan)) {
+        QMessageBox::critical(this, "Erreur", "L'emprunt n'a pas pu être enregistré.");
+        return;
+    }
+
+    showSummary(mat->designation, st->prenom + " " + st->nom, st->matricule, start, end);
 
     m_material->clear();
     m_matricule->clear();
 
-    emit loanCreated(materialName);
+    emit loanCreated(mat->designation);
 }
 
 void EmpruntsPage::showSummary(const QString &material, const QString &who,

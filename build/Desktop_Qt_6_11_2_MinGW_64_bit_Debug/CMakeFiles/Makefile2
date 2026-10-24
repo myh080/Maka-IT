@@ -79,16 +79,16 @@ clean: CMakeFiles/Maka_IT_autogen.dir/clean
 # Target rules for target CMakeFiles/Maka_IT.dir
 
 # All Build rule for target.
-CMakeFiles/Maka_IT.dir/all: CMakeFiles/Maka_IT_autogen.dir/all
 CMakeFiles/Maka_IT.dir/all: CMakeFiles/Maka_IT_autogen_timestamp_deps.dir/all
+CMakeFiles/Maka_IT.dir/all: CMakeFiles/Maka_IT_autogen.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9,10,11 "Built target Maka_IT"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13 "Built target Maka_IT"
 .PHONY : CMakeFiles/Maka_IT.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Maka_IT.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" 12
+	$(CMAKE_COMMAND) -E cmake_progress_start "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" 14
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Maka_IT.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" 0
 .PHONY : CMakeFiles/Maka_IT.dir/rule
@@ -135,7 +135,7 @@ CMakeFiles/Maka_IT_autogen_timestamp_deps.dir/clean:
 CMakeFiles/Maka_IT_autogen.dir/all: CMakeFiles/Maka_IT_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT_autogen.dir\build.make CMakeFiles/Maka_IT_autogen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT_autogen.dir\build.make CMakeFiles/Maka_IT_autogen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=12 "Built target Maka_IT_autogen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=14 "Built target Maka_IT_autogen"
 .PHONY : CMakeFiles/Maka_IT_autogen.dir/all
 
 # Build rule for subdir invocation for target.

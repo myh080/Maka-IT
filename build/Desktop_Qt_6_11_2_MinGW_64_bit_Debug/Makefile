@@ -322,6 +322,54 @@ materielspage.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/materielspage.cpp.s
 .PHONY : materielspage.cpp.s
 
+retourspage.obj: retourspage.cpp.obj
+.PHONY : retourspage.obj
+
+# target to build an object file
+retourspage.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/retourspage.cpp.obj
+.PHONY : retourspage.cpp.obj
+
+retourspage.i: retourspage.cpp.i
+.PHONY : retourspage.i
+
+# target to preprocess a source file
+retourspage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/retourspage.cpp.i
+.PHONY : retourspage.cpp.i
+
+retourspage.s: retourspage.cpp.s
+.PHONY : retourspage.s
+
+# target to generate assembly for a file
+retourspage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/retourspage.cpp.s
+.PHONY : retourspage.cpp.s
+
+theme.obj: theme.cpp.obj
+.PHONY : theme.obj
+
+# target to build an object file
+theme.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/theme.cpp.obj
+.PHONY : theme.cpp.obj
+
+theme.i: theme.cpp.i
+.PHONY : theme.i
+
+# target to preprocess a source file
+theme.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/theme.cpp.i
+.PHONY : theme.cpp.i
+
+theme.s: theme.cpp.s
+.PHONY : theme.s
+
+# target to generate assembly for a file
+theme.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/theme.cpp.s
+.PHONY : theme.cpp.s
+
 toggleswitch.obj: toggleswitch.cpp.obj
 .PHONY : toggleswitch.obj
 
@@ -402,6 +450,12 @@ help:
 	@echo ... materielspage.obj
 	@echo ... materielspage.i
 	@echo ... materielspage.s
+	@echo ... retourspage.obj
+	@echo ... retourspage.i
+	@echo ... retourspage.s
+	@echo ... theme.obj
+	@echo ... theme.i
+	@echo ... theme.s
 	@echo ... toggleswitch.obj
 	@echo ... toggleswitch.i
 	@echo ... toggleswitch.s

@@ -1,73 +1,271 @@
 #include "datastore.h"
 
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
+#include <QDebug>
+
+namespace {
+
+const QString DB_PATH = "H:/Qt project/Maka_IT/maka_it.db";
+const QString CONN    = "maka_it";
+const QString ISO     = "yyyy-MM-dd";
+
+bool run(QSqlQuery &q)
+{
+    if (!q.exec()) {
+        qWarning() << "Erreur SQL :" << q.lastError().text() << "\n" << q.lastQuery();
+        return false;
+    }
+    return true;
+}
+
+} // namespace
+
 DataStore::DataStore()
 {
-    m_students = {
-        { "ETU001", "Rakoto",        "Miora" },
-        { "ETU002", "Rabe",          "Hery"  },
-        { "ETU003", "Andriamifidy",  "Lova"  },
-        { "ETU004", "Razafindrabe",  "Tiana" },
-        { "ETU005", "Rakotomamonjy", "Sarah" }
-    };
+    if (!open())
+        return;
 
-    m_materials = {
-        { "Arduino Uno R3",           "A0001-00123" },
-        { "Arduino Mega 2560",        "A0001-00456" },
-        { "Raspberry Pi 4",           "RPI4-00876"  },
-        { "ESP32 DevKit",             "ESP32-11223" },
-        { "Arduino Nano",             "A0002-00987" },
-        { "Breadboard",               "BB-00145"    },
-        { "Capteur Ultrason HC-SR04", "HC-00321"    },
-        { "Servo Moteur SG90",        "SG90-00765"  },
-        { "Kit Arduino Complet",      "KIT-00112"   },
-        { "Écran OLED 0.96\"",        "OLED-00567"  },
-        { "Module Relais 5V",         "REL-00934"   },
-        { "Caméra ESP32-CAM",         "CAM-00421"   }
-    };
+    if (!db().tables().contains("emprunteur")) {
+        qWarning() << "Base vide : créez les tables dans DB Browser. Fichier :" << DB_PATH;
+        return;
+    }
 
-    // Exemples de prêts, dates calculées à partir d'aujourd'hui
-    const QDate today = QDate::currentDate();
-    m_loans = {
-        { "Arduino Mega 2560", "ETU002", today.addDays(-3),  today.addDays(4),  false },  // en cours
-        { "Breadboard",        "ETU004", today.addDays(-10), today.addDays(-2), false }   // en retard
-    };
+    qDebug() << "Base ouverte :" << DB_PATH;
 }
 
-const Student *DataStore::findStudent(const QString &matricule) const
+DataStore::~DataStore()
 {
-    for (const Student &s : m_students)
-        if (s.matricule.compare(matricule, Qt::CaseInsensitive) == 0)
-            return &s;
-    return nullptr;
+    {
+        QSqlDatabase d = db();
+        if (d.isOpen())
+            d.close();
+    }
+    QSqlDatabase::removeDatabase(CONN);
 }
 
-const Material *DataStore::findMaterial(const QString &key) const
+QSqlDatabase DataStore::db() const
 {
-    for (const Material &m : m_materials)
-        if (m.name.compare(key, Qt::CaseInsensitive) == 0
-            || m.serial.compare(key, Qt::CaseInsensitive) == 0)
-            return &m;
-    return nullptr;
+    return QSqlDatabase::database(CONN);
 }
 
-bool DataStore::isBorrowed(const QString &materialName) const
+bool DataStore::open()
 {
-    for (const Loan &l : m_loans)
-        if (!l.returned && l.materialName == materialName)
-            return true;
-    return false;
+    QSqlDatabase d = QSqlDatabase::addDatabase("QSQLITE", CONN);
+    d.setDatabaseName(DB_PATH);
+
+    if (!d.open()) {
+        qWarning() << "ECHEC ouverture :" << d.lastError().text() << "| chemin :" << DB_PATH;
+        return false;
+    }
+
+    QSqlQuery pragma(d);
+    pragma.exec("PRAGMA foreign_keys = ON");
+    return true;
 }
 
-bool DataStore::hasLateLoan(const QString &matricule) const
+std::optional<Student> DataStore::findStudent(const QString &matricule) const
 {
-    const QDate today = QDate::currentDate();
-    for (const Loan &l : m_loans)
-        if (!l.returned && l.matricule == matricule && l.end < today)
-            return true;
-    return false;
+    QSqlQuery q(db());
+    q.prepare("SELECT id_emprunteur, matricule, nom, prenom FROM emprunteur "
+              "WHERE matricule = ? COLLATE NOCASE");
+    q.addBindValue(matricule);
+
+    if (!run(q) || !q.next())
+        return std::nullopt;
+
+    return Student{ q.value(0).toInt(), q.value(1).toString(),
+                   q.value(2).toString(), q.value(3).toString() };
 }
 
-void DataStore::addLoan(const Loan &loan)
+std::optional<Material> DataStore::findMaterial(const QString &key) const
 {
-    m_loans << loan;
+    QSqlQuery q(db());
+    q.prepare("SELECT id_materiel, designation, numero_serie, etat FROM materiel "
+              "WHERE designation = ? COLLATE NOCASE OR numero_serie = ? COLLATE NOCASE LIMIT 1");
+    q.addBindValue(key);
+    q.addBindValue(key);
+
+    if (!run(q) || !q.next())
+        return std::nullopt;
+
+    return Material{ q.value(0).toInt(), q.value(1).toString(),
+                    q.value(2).toString(), q.value(3).toString() };
+}
+
+bool DataStore::isBorrowed(int materielId) const
+{
+    QSqlQuery q(db());
+    q.prepare("SELECT COUNT(*) FROM emprunt "
+              "WHERE id_materiel = ? AND date_retour_effective IS NULL");
+    q.addBindValue(materielId);
+
+    return run(q) && q.next() && q.value(0).toInt() > 0;
+}
+
+bool DataStore::hasLateLoan(int emprunteurId) const
+{
+    QSqlQuery q(db());
+    q.prepare("SELECT COUNT(*) FROM emprunt "
+              "WHERE id_emprunteur = ? AND date_retour_effective IS NULL "
+              "AND date_retour_prevue < ?");
+    q.addBindValue(emprunteurId);
+    q.addBindValue(QDate::currentDate().toString(ISO));
+
+    return run(q) && q.next() && q.value(0).toInt() > 0;
+}
+
+bool DataStore::addLoan(const Loan &loan)
+{
+    QSqlDatabase d = db();
+    d.transaction();
+
+    QSqlQuery ins(d);
+    ins.prepare("INSERT INTO emprunt (id_emprunteur, id_materiel, date_emprunt, date_retour_prevue) "
+                "VALUES (?, ?, ?, ?)");
+    ins.addBindValue(loan.emprunteurId);
+    ins.addBindValue(loan.materielId);
+    ins.addBindValue(loan.dateEmprunt.toString(ISO));
+    ins.addBindValue(loan.dateRetourPrevue.toString(ISO));
+
+    QSqlQuery upd(d);
+    upd.prepare("UPDATE materiel SET etat = 'emprunte' WHERE id_materiel = ?");
+    upd.addBindValue(loan.materielId);
+
+    if (!run(ins) || !run(upd)) {
+        d.rollback();
+        return false;
+    }
+
+    return d.commit();
+}
+
+QList<Category> DataStore::listCategories() const
+{
+    QList<Category> out;
+
+    QSqlQuery q(db());
+    q.prepare("SELECT c.id_categorie, c.libelle, COUNT(m.id_materiel) "
+              "FROM categorie c LEFT JOIN materiel m ON m.id_categorie = c.id_categorie "
+              "GROUP BY c.id_categorie, c.libelle ORDER BY c.id_categorie");
+
+    if (!run(q))
+        return out;
+
+    while (q.next())
+        out << Category{ q.value(0).toInt(), q.value(1).toString(), q.value(2).toInt() };
+
+    return out;
+}
+
+QList<MaterialRow> DataStore::listMaterials(int categoryId, const QString &search) const
+{
+    QList<MaterialRow> out;
+    const QString like = "%" + search.trimmed() + "%";
+
+    QSqlQuery q(db());
+    q.prepare("SELECT m.id_materiel, m.designation, m.numero_serie, m.etat, c.libelle, m.photo "
+              "FROM materiel m LEFT JOIN categorie c ON c.id_categorie = m.id_categorie "
+              "WHERE (? = 0 OR m.id_categorie = ?) "
+              "AND (m.designation LIKE ? OR m.numero_serie LIKE ?) "
+              "ORDER BY m.designation");
+    q.addBindValue(categoryId);
+    q.addBindValue(categoryId);
+    q.addBindValue(like);
+    q.addBindValue(like);
+
+    if (!run(q))
+        return out;
+
+    while (q.next())
+        out << MaterialRow{ q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(),
+                           q.value(3).toString(), q.value(4).toString(), q.value(5).toString() };
+
+    return out;
+}
+
+bool DataStore::addMaterial(const QString &designation, const QString &numeroSerie,
+                            int categoryId, const QString &photo)
+{
+    QSqlQuery q(db());
+    q.prepare("INSERT INTO materiel (id_categorie, designation, numero_serie, etat, photo) "
+              "VALUES (?, ?, ?, 'disponible', ?)");
+    q.addBindValue(categoryId);
+    q.addBindValue(designation);
+    q.addBindValue(numeroSerie);
+    q.addBindValue(photo.isEmpty() ? QVariant() : QVariant(photo));
+
+    return run(q);
+}
+
+bool DataStore::hasActiveLoan(int emprunteurId) const
+{
+    QSqlQuery q(db());
+    q.prepare("SELECT COUNT(*) FROM emprunt "
+              "WHERE id_emprunteur = ? AND date_retour_effective IS NULL");
+    q.addBindValue(emprunteurId);
+
+    return run(q) && q.next() && q.value(0).toInt() > 0;
+}
+
+QList<ActiveLoan> DataStore::listActiveLoans() const
+{
+    QList<ActiveLoan> out;
+
+    QSqlQuery q(db());
+    q.prepare("SELECT e.id_emprunt, m.id_materiel, m.designation, m.numero_serie, "
+              "       em.id_emprunteur, em.matricule, em.prenom, em.nom, "
+              "       e.date_emprunt, e.date_retour_prevue "
+              "FROM emprunt e "
+              "JOIN materiel m    ON m.id_materiel    = e.id_materiel "
+              "JOIN emprunteur em ON em.id_emprunteur = e.id_emprunteur "
+              "WHERE e.date_retour_effective IS NULL "
+              "ORDER BY e.date_retour_prevue");
+
+    if (!run(q))
+        return out;
+
+    while (q.next()) {
+        ActiveLoan l;
+        l.id               = q.value(0).toInt();
+        l.materielId       = q.value(1).toInt();
+        l.designation      = q.value(2).toString();
+        l.numeroSerie      = q.value(3).toString();
+        l.emprunteurId     = q.value(4).toInt();
+        l.matricule        = q.value(5).toString();
+        l.nomComplet       = q.value(6).toString() + " " + q.value(7).toString();
+        l.dateEmprunt      = QDate::fromString(q.value(8).toString(), Qt::ISODate);
+        l.dateRetourPrevue = QDate::fromString(q.value(9).toString(), Qt::ISODate);
+        out << l;
+    }
+
+    return out;
+}
+
+bool DataStore::returnLoan(int idEmprunt, bool endommage)
+{
+    QSqlDatabase d = db();
+    d.transaction();
+
+    QSqlQuery upd(d);
+    upd.prepare("UPDATE emprunt SET date_retour_effective = ? "
+                "WHERE id_emprunt = ? AND date_retour_effective IS NULL");
+    upd.addBindValue(QDate::currentDate().toString(ISO));
+    upd.addBindValue(idEmprunt);
+
+    QSqlQuery mat(d);
+    mat.prepare("UPDATE materiel SET etat = ? "
+                "WHERE etat = 'emprunte' "
+                "AND id_materiel = (SELECT id_materiel FROM emprunt WHERE id_emprunt = ?)");
+    mat.addBindValue(endommage ? "endommage" : "disponible");
+    mat.addBindValue(idEmprunt);
+
+    if (!run(upd) || !run(mat) || upd.numRowsAffected() != 1) {
+        d.rollback();
+        return false;
+    }
+
+    return d.commit();
 }

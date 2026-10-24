@@ -41,7 +41,7 @@ template <> constexpr inline auto MaterielsPage::qt_create_metaobjectdata<qt_met
         "MaterielsPage",
         "emprunterRequested",
         "",
-        "name"
+        "designation"
     };
 
     QtMocHelpers::UintData qt_methods {

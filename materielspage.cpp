@@ -18,6 +18,7 @@
 #include <QPointF>
 #include <QColor>
 #include <QEvent>
+#include <QShowEvent>
 #include <QMessageBox>
 #include <QStyle>
 #include <utility>
@@ -26,83 +27,6 @@ namespace {
 
 constexpr int COLUMNS = 3;
 
-const QStringList CATEGORIES = {
-    "Tous", "Ordinateurs", "Écrans", "Claviers", "Souris",
-    "Projecteurs", "Imprimantes", "Arduino & µC", "Réseau", "Autres"
-};
-
-const char *PAGE_QSS = R"CSS(
-QLabel { background: transparent; color: #e5e7eb; }
-QLabel#title { font-size: 24px; font-weight: bold; color: white; }
-QLabel#subtitle { font-size: 12px; color: #94a3b8; }
-QLabel#panelTitle { font-size: 14px; font-weight: bold; color: white; }
-
-QFrame#panel {
-    background-color: rgba(10, 10, 14, 190);
-    border: 1px solid rgba(56, 189, 248, 80);
-    border-radius: 14px;
-}
-QFrame#catRow { background: transparent; border: 1px solid transparent; border-radius: 8px; }
-QFrame#catRow[selected="true"] {
-    background-color: rgba(56, 189, 248, 70);
-    border: 1px solid #38bdf8;
-}
-QLabel#catCount { color: #94a3b8; font-size: 12px; }
-QListWidget#cats { background: transparent; border: none; outline: none; }
-QListWidget#cats::item { background: transparent; border: none; }
-QListWidget#cats::item:selected { background: transparent; }
-QListWidget#cats::item:hover { background: transparent; }
-
-QFrame#matCard {
-    background-color: rgba(10, 10, 14, 200);
-    border: 1px solid rgba(56, 189, 248, 90);
-    border-radius: 14px;
-}
-QFrame#matCard:hover { border: 1px solid #38bdf8; }
-QFrame#imageBox { background-color: rgba(56, 189, 248, 18); border-radius: 10px; }
-QLabel#matName { font-size: 14px; font-weight: bold; color: white; }
-QLabel#matSerial { font-size: 11px; color: #94a3b8; }
-QLabel#catBadge {
-    background-color: rgba(56, 189, 248, 40);
-    color: #7dd3fc;
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-size: 10px;
-}
-QLabel#warn { color: #f87171; font-size: 16px; font-weight: bold; }
-QPushButton#more {
-    background: transparent;
-    color: #94a3b8;
-    border: none;
-    font-size: 14px;
-    font-weight: bold;
-}
-QPushButton#more:hover { color: white; }
-
-QLineEdit#search {
-    background-color: rgba(10, 10, 14, 200);
-    border: 1px solid rgba(56, 189, 248, 80);
-    border-radius: 10px;
-    padding: 8px 12px;
-    color: white;
-}
-QLineEdit#search:focus { border: 1px solid #38bdf8; }
-
-QPushButton#addBtn {
-    background-color: rgba(56, 189, 248, 60);
-    color: white;
-    border: 1px solid #38bdf8;
-    border-radius: 10px;
-    padding: 9px 16px;
-    font-weight: bold;
-}
-QPushButton#addBtn:hover { background-color: rgba(56, 189, 248, 110); }
-
-QScrollArea { background: transparent; border: none; }
-QWidget#gridHost { background: transparent; }
-)CSS";
-
-// Icône de recherche dessinée en code (pas de fichier nécessaire)
 QIcon searchIcon(const QColor &color)
 {
     QPixmap pm(32, 32);
@@ -121,18 +45,18 @@ QIcon searchIcon(const QColor &color)
 
 } // namespace
 
-MaterielsPage::MaterielsPage(QWidget *parent)
+MaterielsPage::MaterielsPage(DataStore *store, QWidget *parent)
     : QWidget(parent)
+    , m_store(store)
 {
     setAttribute(Qt::WA_TranslucentBackground);
     setAutoFillBackground(false);
-    setStyleSheet(PAGE_QSS);
 
     auto *root = new QVBoxLayout(this);
     root->setContentsMargins(24, 20, 24, 20);
     root->setSpacing(16);
 
-    // ----- En-tête : titre, recherche, bouton -----
+    // ----- En-tête -----
     auto *head = new QHBoxLayout;
 
     auto *titles = new QVBoxLayout;
@@ -148,10 +72,9 @@ MaterielsPage::MaterielsPage(QWidget *parent)
     m_search->setObjectName("search");
     m_search->setPlaceholderText("Rechercher un matériel...");
     m_search->setFixedSize(280, 40);
-    m_search->setStyleSheet("QLineEdit { padding-left: 40px; }");   // laisse la place à l'icône
+    m_search->setStyleSheet("QLineEdit { padding-left: 40px; }");
     head->addWidget(m_search);
 
-    // Icône de recherche, posée par-dessus le champ à gauche
     QLabel *searchIco = new QLabel(m_search);
     searchIco->setPixmap(searchIcon(QColor("#94a3b8")).pixmap(QSize(18, 18)));
     searchIco->setGeometry(12, 11, 18, 18);
@@ -200,52 +123,124 @@ MaterielsPage::MaterielsPage(QWidget *parent)
 
     root->addLayout(body, 1);
 
-    // ----- Données (à remplacer plus tard par SQLite) -----
-    m_catNames = CATEGORIES;
-
-    addItem({ "Arduino Uno R3",          "A0001-00123", "Arduino & µC", 0, "" });
-    addItem({ "Arduino Mega 2560",       "A0001-00456", "Arduino & µC", 1, "" });
-    addItem({ "Raspberry Pi 4",          "RPI4-00876",  "Réseau",       0, "" });
-    addItem({ "ESP32 DevKit",            "ESP32-11223", "Arduino & µC", 0, "" });
-    addItem({ "Arduino Nano",            "A0002-00987", "Arduino & µC", 0, "" });
-    addItem({ "Breadboard",              "BB-00145",    "Autres",       0, "" });
-    addItem({ "Capteur Ultrason HC-SR04","HC-00321",    "Arduino & µC", 0, "" });
-    addItem({ "Servo Moteur SG90",       "SG90-00765",  "Arduino & µC", 2, "" });
-    addItem({ "Kit Arduino Complet",     "KIT-00112",   "Arduino & µC", 0, "" });
-    addItem({ "Écran OLED 0.96\"",       "OLED-00567",  "Écrans",       0, "" });
-    addItem({ "Module Relais 5V",        "REL-00934",   "Autres",       0, "" });
-    addItem({ "Caméra ESP32-CAM",        "CAM-00421",   "Autres",       2, "" });
-
-    rebuildCategories();
-
     // ----- Connexions -----
     connect(m_cats, &QListWidget::currentRowChanged, this, [this](int row) {
-        m_currentCat = (row >= 0 && row < m_catNames.size()) ? m_catNames[row] : "Tous";
-        updateCatSelection(row);
-        refresh();
+        selectCategory(row);
     });
     connect(m_search, &QLineEdit::textChanged, this, [this](const QString &) {
-        refresh();
+        loadMaterials();
     });
     connect(addBtn, &QPushButton::clicked, this, &MaterielsPage::onAddClicked);
 
-    m_cats->setCurrentRow(0);
-    refresh();
+    loadCategories();
 }
 
-void MaterielsPage::addItem(const Item &it)
+void MaterielsPage::showEvent(QShowEvent *event)
 {
-    m_items << it;
-    m_cards << makeCard(it, m_items.size() - 1);
+    QWidget::showEvent(event);
+    // Recharge à chaque affichage : un emprunt fait ailleurs apparaît ici
+    loadCategories();
 }
 
-QFrame *MaterielsPage::makeCard(const Item &it, int index)
+void MaterielsPage::loadCategories()
+{
+    const int keepId = m_currentCat;
+
+    m_categories = m_store->listCategories();
+
+    Category all;
+    all.id = 0;
+    all.libelle = "Tous";
+    for (const Category &c : std::as_const(m_categories))
+        all.count += c.count;
+    m_categories.prepend(all);
+
+    m_cats->blockSignals(true);
+    m_cats->clear();
+    m_catRows.clear();
+
+    for (const Category &c : std::as_const(m_categories)) {
+        QListWidgetItem *li = new QListWidgetItem(m_cats);
+        li->setSizeHint(QSize(0, 42));
+
+        QFrame *row = new QFrame;
+        row->setObjectName("catRow");
+        row->setAttribute(Qt::WA_TransparentForMouseEvents);
+
+        auto *rl = new QHBoxLayout(row);
+        rl->setContentsMargins(12, 0, 12, 0);
+
+        QLabel *name = new QLabel(c.libelle);
+        QLabel *count = new QLabel(QString::number(c.count));
+        count->setObjectName("catCount");
+        rl->addWidget(name, 1);
+        rl->addWidget(count);
+
+        m_cats->setItemWidget(li, row);
+        m_catRows << row;
+    }
+
+    int row = 0;
+    for (int i = 0; i < m_categories.size(); ++i) {
+        if (m_categories[i].id == keepId) {
+            row = i;
+            break;
+        }
+    }
+    m_cats->setCurrentRow(row);
+    m_cats->blockSignals(false);
+
+    selectCategory(row);
+}
+
+void MaterielsPage::selectCategory(int row)
+{
+    if (row < 0 || row >= m_categories.size())
+        return;
+
+    m_currentCat = m_categories[row].id;
+
+    for (int i = 0; i < m_catRows.size(); ++i) {
+        QFrame *r = m_catRows[i];
+        r->setProperty("selected", i == row);
+        r->style()->unpolish(r);
+        r->style()->polish(r);
+    }
+
+    loadMaterials();
+}
+
+void MaterielsPage::loadMaterials()
+{
+    for (QFrame *card : std::as_const(m_cards)) {
+        m_grid->removeWidget(card);
+        card->deleteLater();
+    }
+    m_cards.clear();
+
+    m_rows = m_store->listMaterials(m_currentCat, m_search->text());
+
+    int row = 0;
+    int col = 0;
+    for (int i = 0; i < m_rows.size(); ++i) {
+        QFrame *card = makeCard(m_rows[i], i);
+        m_grid->addWidget(card, row, col);
+        m_cards << card;
+
+        if (++col == COLUMNS) {
+            col = 0;
+            ++row;
+        }
+    }
+}
+
+QFrame *MaterielsPage::makeCard(const MaterialRow &row, int index)
 {
     QFrame *card = new QFrame(m_gridHost);
     card->setObjectName("matCard");
     card->setMinimumWidth(200);
     card->setProperty("index", index);
-    card->installEventFilter(this);     // double-clic géré dans eventFilter
+    card->installEventFilter(this);
 
     auto *lay = new QVBoxLayout(card);
     lay->setContentsMargins(14, 12, 14, 12);
@@ -253,18 +248,18 @@ QFrame *MaterielsPage::makeCard(const Item &it, int index)
 
     // En-tête : catégorie, avertissement si endommagé
     auto *head = new QHBoxLayout;
-    QLabel *badge = new QLabel(it.category);
+    QLabel *badge = new QLabel(row.libelle);
     badge->setObjectName("catBadge");
     head->addWidget(badge);
     head->addStretch();
-    if (it.status == 2) {
+    if (row.etat == "endommage") {
         QLabel *warn = new QLabel("⚠");
         warn->setObjectName("warn");
         head->addWidget(warn);
     }
     lay->addLayout(head);
 
-    // Image : photo choisie, ou initiale en attendant
+    // Image : photo, ou initiale en attendant
     QFrame *imageBox = new QFrame;
     imageBox->setObjectName("imageBox");
     imageBox->setFixedHeight(110);
@@ -273,32 +268,37 @@ QFrame *MaterielsPage::makeCard(const Item &it, int index)
 
     QLabel *img = new QLabel;
     img->setAlignment(Qt::AlignCenter);
-    const QPixmap pm(it.photo);
-    if (!it.photo.isEmpty() && !pm.isNull()) {
+    const QPixmap pm(row.photo);
+    if (!row.photo.isEmpty() && !pm.isNull()) {
         img->setPixmap(pm.scaled(180, 98, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     } else {
-        img->setText(it.name.left(1).toUpper());
+        img->setText(row.designation.left(1).toUpper());
         img->setStyleSheet("font-size: 40px; font-weight: bold;"
                            " color: rgba(125, 211, 252, 170); background: transparent;");
     }
     il->addWidget(img);
     lay->addWidget(imageBox);
 
-    QLabel *name = new QLabel(it.name);
+    QLabel *name = new QLabel(row.designation);
     name->setObjectName("matName");
     name->setWordWrap(true);
-    QLabel *serial = new QLabel("N° série : " + it.serial);
+    QLabel *serial = new QLabel("N° série : " + row.numeroSerie);
     serial->setObjectName("matSerial");
     lay->addWidget(name);
     lay->addWidget(serial);
 
-    // Ligne d'état : pastille, texte, bouton ...
+    // Etat réel, lu dans la base
     QString color;
     QString text;
-    switch (it.status) {
-    case 1:  color = "#fb923c"; text = "Emprunté";  break;
-    case 2:  color = "#f87171"; text = "Endommagé"; break;
-    default: color = "#4ade80"; text = "Disponible"; break;
+    if (row.etat == "emprunte") {
+        color = "#fb923c";
+        text = "Emprunté";
+    } else if (row.etat == "endommage") {
+        color = "#f87171";
+        text = "Endommagé";
+    } else {
+        color = "#4ade80";
+        text = "Disponible";
     }
 
     auto *statusRow = new QHBoxLayout;
@@ -309,101 +309,13 @@ QFrame *MaterielsPage::makeCard(const Item &it, int index)
     QLabel *st = new QLabel(text);
     st->setStyleSheet(QString("color: %1; font-size: 11px;").arg(color));
 
-    QPushButton *more = new QPushButton("...");
-    more->setObjectName("more");
-    more->setCursor(Qt::PointingHandCursor);
-
     statusRow->addWidget(dot);
     statusRow->addSpacing(6);
     statusRow->addWidget(st);
     statusRow->addStretch();
-    statusRow->addWidget(more);
     lay->addLayout(statusRow);
 
     return card;
-}
-
-void MaterielsPage::rebuildCategories()
-{
-    const int keep = m_cats->currentRow() < 0 ? 0 : m_cats->currentRow();
-
-    m_cats->blockSignals(true);
-    m_cats->clear();
-    m_catRows.clear();
-
-    for (const QString &name : std::as_const(m_catNames)) {
-        int count = 0;
-        for (const Item &it : std::as_const(m_items))
-            if (name == "Tous" || it.category == name)
-                ++count;
-
-        QListWidgetItem *li = new QListWidgetItem(m_cats);
-        li->setSizeHint(QSize(0, 42));
-
-        QFrame *row = new QFrame;
-        row->setObjectName("catRow");
-        row->setAttribute(Qt::WA_TransparentForMouseEvents);   // le clic passe à la liste
-
-        auto *rl = new QHBoxLayout(row);
-        rl->setContentsMargins(12, 0, 12, 0);
-
-        QLabel *n = new QLabel(name);
-        QLabel *c = new QLabel(QString::number(count));
-        c->setObjectName("catCount");
-        rl->addWidget(n, 1);
-        rl->addWidget(c);
-
-        m_cats->setItemWidget(li, row);
-        m_catRows << row;
-    }
-
-    m_cats->blockSignals(false);
-    m_cats->setCurrentRow(keep);
-    updateCatSelection(keep);
-}
-
-void MaterielsPage::updateCatSelection(int row)
-{
-    for (int i = 0; i < m_catRows.size(); ++i) {
-        QFrame *r = m_catRows[i];
-        r->setProperty("selected", i == row);
-        r->style()->unpolish(r);
-        r->style()->polish(r);
-    }
-}
-
-void MaterielsPage::refresh()
-{
-    const QString needle = m_search->text().trimmed();
-
-    // Retire toutes les cartes de la grille
-    for (QFrame *card : std::as_const(m_cards)) {
-        m_grid->removeWidget(card);
-        card->hide();
-    }
-
-    // Replace celles qui correspondent à la catégorie et à la recherche
-    int row = 0;
-    int col = 0;
-    for (int i = 0; i < m_items.size(); ++i) {
-        const Item &it = m_items[i];
-
-        const bool inCat  = (m_currentCat == "Tous") || (it.category == m_currentCat);
-        const bool inText = needle.isEmpty()
-                            || it.name.contains(needle, Qt::CaseInsensitive)
-                            || it.serial.contains(needle, Qt::CaseInsensitive);
-
-        if (!inCat || !inText)
-            continue;
-
-        m_grid->addWidget(m_cards[i], row, col);
-        m_cards[i]->show();
-
-        if (++col == COLUMNS) {
-            col = 0;
-            ++row;
-        }
-    }
 }
 
 bool MaterielsPage::eventFilter(QObject *obj, QEvent *ev)
@@ -417,45 +329,49 @@ bool MaterielsPage::eventFilter(QObject *obj, QEvent *ev)
 
 void MaterielsPage::onCardDoubleClicked(int index)
 {
-    if (index < 0 || index >= m_items.size())
+    if (index < 0 || index >= m_rows.size())
         return;
 
-    const Item &it = m_items[index];
+    const MaterialRow row = m_rows[index];
 
-    if (it.status == 0) {
-        const auto answer = QMessageBox::question(
-            this, "Emprunter",
-            QString("Voulez-vous emprunter « %1 » ?").arg(it.name),
-            QMessageBox::Yes | QMessageBox::No);
-
-        if (answer == QMessageBox::Yes)
-            emit emprunterRequested(it.name);
+    if (row.etat == "emprunte") {
+        QMessageBox::information(this, "Matériel indisponible",
+                                 QString("« %1 » est déjà emprunté.").arg(row.designation));
         return;
     }
 
-    const QString reason = (it.status == 2) ? "est endommagé" : "est déjà emprunté";
-    QMessageBox::information(
-        this, "Matériel indisponible",
-        QString("« %1 » %2 et ne peut pas être emprunté pour le moment.").arg(it.name, reason));
+    if (row.etat == "endommage") {
+        QMessageBox::information(this, "Matériel indisponible",
+                                 QString("« %1 » est endommagé et ne peut pas être emprunté.")
+                                     .arg(row.designation));
+        return;
+    }
+
+    const auto answer = QMessageBox::question(
+        this, "Emprunter",
+        QString("Voulez-vous emprunter « %1 » ?").arg(row.designation),
+        QMessageBox::Yes | QMessageBox::No);
+
+    if (answer == QMessageBox::Yes)
+        emit emprunterRequested(row.designation);
 }
 
 void MaterielsPage::onAddClicked()
 {
-    QStringList cats = m_catNames;
-    cats.removeFirst();                  // on retire « Tous »
+    // « Tous » n'est pas une vraie catégorie : on le retire de la liste proposée
+    QList<Category> cats = m_categories;
+    cats.removeFirst();
 
     AddMaterielDialog dlg(cats, this);
     if (dlg.exec() != QDialog::Accepted)
         return;
 
-    Item it;
-    it.name     = dlg.name();
-    it.category = dlg.category();
-    it.serial   = QString("MAT-%1").arg(m_items.size() + 1, 5, 10, QChar('0'));
-    it.status   = 0;
-    it.photo    = dlg.photoPath();
+    if (!m_store->addMaterial(dlg.designation(), dlg.numeroSerie(),
+                              dlg.categoryId(), dlg.photoPath())) {
+        QMessageBox::warning(this, "Ajout impossible",
+                             "Ce numéro de série existe déjà ou l'enregistrement a échoué.");
+        return;
+    }
 
-    addItem(it);
-    rebuildCategories();
-    refresh();
+    loadCategories();
 }

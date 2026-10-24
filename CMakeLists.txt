@@ -7,26 +7,29 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Sql)
 
 add_executable(Maka_IT
     main.cpp
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    zoombackground.h
-    zoombackground.cpp
-    toggleswitch.h
-    toggleswitch.cpp
-    materielspage.h
     materielspage.cpp
-    addmaterieldialog.h addmaterieldialog.cpp
-    datastore.h datastore.cpp
-    empruntspage.h empruntspage.cpp
-
-
-
-
+    materielspage.h
+    addmaterieldialog.cpp
+    addmaterieldialog.h
+    empruntspage.cpp
+    empruntspage.h
+    retourspage.cpp
+    retourspage.h
+    datastore.cpp
+    datastore.h
+    theme.cpp
+    theme.h
+    zoombackground.cpp
+    zoombackground.h
+    toggleswitch.cpp
+    toggleswitch.h
 )
 
-target_link_libraries(Maka_IT PRIVATE Qt6::Widgets)
+target_link_libraries(Maka_IT PRIVATE Qt6::Widgets Qt6::Sql)

@@ -385,7 +385,12 @@ CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
- C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
+ H:\Qt\ project\Maka_IT\datastore.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qlocale.h \
  H:\Qt\ project\Maka_IT\addmaterieldialog.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QDialog \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdialog.h \
@@ -421,7 +426,6 @@ CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qitemselectionmodel.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstyleoption.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qlocale.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qvalidator.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qregularexpression.h \
@@ -448,6 +452,27 @@ CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qabstracteventdispatcher.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qeventloop.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qdeadlinetimer.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QShowEvent \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvector2d.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvectornd.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpointingdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qinputdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QRect \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSize \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qnativeinterface.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qcoreapplication.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qinputmethod.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qguiapplication_platform.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMessageBox \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmessagebox.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \

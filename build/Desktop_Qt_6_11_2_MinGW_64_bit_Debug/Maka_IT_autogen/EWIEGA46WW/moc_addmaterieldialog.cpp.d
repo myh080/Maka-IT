@@ -1,6 +1,8 @@
 H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autogen/EWIEGA46WW/moc_addmaterieldialog.cpp: H:/Qt\ project/Maka_IT/addmaterieldialog.h \
   H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autogen/moc_predefs.h \
-  C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q20bit.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q20functional.h \
@@ -25,6 +27,7 @@ H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autoge
   C:/Qt/6.11.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qbytearraylist.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qbytearrayview.h \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qchar.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qcheckedint_impl.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qcompare.h \
@@ -39,6 +42,7 @@ H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autoge
   C:/Qt/6.11.2/mingw_64/include/QtCore/qcontiguouscache.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qdatastream.h \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qdebug.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qendian.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qexceptionhandling.h \
@@ -58,6 +62,7 @@ H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autoge
   C:/Qt/6.11.2/mingw_64/include/QtCore/qlatin1stringview.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qline.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qlist.h \
+  C:/Qt/6.11.2/mingw_64/include/QtCore/qlocale.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qlogging.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qmalloc.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/qmap.h \
@@ -374,4 +379,5 @@ H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autoge
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/sys/types.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
-  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
+  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
+  H:/Qt\ project/Maka_IT/datastore.h

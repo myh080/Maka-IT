@@ -440,7 +440,9 @@ CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
- H:\Qt\ project\Maka_IT\empruntspage.h \
+ H:\Qt\ project\Maka_IT\empruntspage.h H:\Qt\ project\Maka_IT\theme.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QColor \
+ H:\Qt\ project\Maka_IT\retourspage.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QStackedWidget \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstackedwidget.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsOpacityEffect \
@@ -498,7 +500,6 @@ CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QPainterPath \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h \
- C:/Qt/6.11.2/mingw_64/include/QtGui/QColor \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QPen \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QIcon \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDebug

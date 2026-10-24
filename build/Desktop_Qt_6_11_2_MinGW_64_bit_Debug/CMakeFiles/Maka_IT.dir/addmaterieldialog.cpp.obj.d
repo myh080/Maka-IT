@@ -385,7 +385,13 @@ CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qsizepolicy.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qbitmap.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+ H:\Qt\ project\Maka_IT\datastore.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qlocale.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QVBoxLayout \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qboxlayout.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qlayout.h \
@@ -409,7 +415,6 @@ CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qcombobox.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstyleoption.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qlocale.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qvalidator.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qregularexpression.h \
@@ -458,8 +463,6 @@ CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/codecvt \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_dir.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_ops.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qfile.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qfileinfo.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qtimezone.h \

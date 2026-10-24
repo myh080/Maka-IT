@@ -51,4 +51,5 @@ private:
     double m_mapAlpha = 0.0;    // opacité de la carte (la sphère prend le reste)
     bool m_inverted = false;
     bool m_dashShown = false;
+    bool m_mapReached = false;   // true dès que la carte a été affichée
 };

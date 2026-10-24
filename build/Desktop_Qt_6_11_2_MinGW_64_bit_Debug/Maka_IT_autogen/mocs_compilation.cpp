@@ -3,5 +3,6 @@
 #include "EWIEGA46WW/moc_empruntspage.cpp"
 #include "EWIEGA46WW/moc_mainwindow.cpp"
 #include "EWIEGA46WW/moc_materielspage.cpp"
+#include "EWIEGA46WW/moc_retourspage.cpp"
 #include "EWIEGA46WW/moc_toggleswitch.cpp"
 #include "EWIEGA46WW/moc_zoombackground.cpp"

@@ -5,7 +5,8 @@
 #include "materielspage.h"
 #include "datastore.h"
 #include "empruntspage.h"
-
+#include "theme.h"
+#include "retourspage.h"
 
 #include <QStackedWidget>
 #include <QGraphicsOpacityEffect>
@@ -30,38 +31,13 @@
 #include <QDebug>
 
 namespace {
-constexpr int TOP_BAR = 70;   // hauteur réservée en haut pour la bascule Light/Dark
+
 constexpr int SIDEBAR_WIDTH = 220;
+constexpr int TOP_BAR = 70;
 const QString ICON_DIR = "H:/Qt project/Maka_IT/";
 
-// Style du tableau de bord
-const char *DASH_QSS = R"CSS(
-QFrame#card {
-    background-color: rgba(10, 10, 14, 170);
-    border: 1px solid rgba(255, 255, 255, 45);
-    border-radius: 14px;
-}
-QLabel { color: #e2e8f0; background: transparent; }
-QLabel#h1 { font-size: 22px; font-weight: bold; color: white; }
-QLabel#sub { font-size: 12px; color: #94a3b8; }
-QLabel#cardTitle { font-size: 13px; font-weight: 600; color: white; }
-QLabel#kpiValue { font-size: 26px; font-weight: bold; color: white; }
-QLabel#kpiTitle { font-size: 12px; color: #e2e8f0; }
-QLabel#up { font-size: 11px; color: #4ade80; }
-QLabel#down { font-size: 11px; color: #f87171; }
-QLabel#legend { font-size: 12px; color: #e2e8f0; }
-QLabel#legendVal { font-size: 12px; color: #94a3b8; }
-QPushButton#action {
-    background-color: rgba(255, 255, 255, 12);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 45);
-    border-radius: 10px;
-    text-align: left;
-    padding: 9px 14px;
-    font-size: 12px;
-}
-QPushButton#action:hover { background-color: rgba(255, 255, 255, 30); }
-)CSS";
+// Couleurs fixes du camembert, lisibles dans les deux thèmes
+const QStringList PIE_COLORS = { "#38bdf8", "#818cf8", "#34d399", "#fbbf24", "#f87171" };
 
 // Image du projet, colorée en gardant la transparence du PNG
 QPixmap loadTinted(const QString &file, const QColor &color)
@@ -134,7 +110,7 @@ QWidget *makeKpi(const QString &value, const QString &title,
     return card;
 }
 
-// Tableau translucide, utilisé par toutes les pages
+// Tableau utilisé par les pages : les couleurs viennent du thème
 QTableWidget *makeTable(const QStringList &headers, const QList<QStringList> &rows)
 {
     QTableWidget *table = new QTableWidget(rows.size(), headers.size());
@@ -145,13 +121,6 @@ QTableWidget *makeTable(const QStringList &headers, const QList<QStringList> &ro
     table->verticalHeader()->setVisible(false);
     table->horizontalHeader()->setStretchLastSection(true);
     table->viewport()->setAutoFillBackground(false);
-    table->setStyleSheet(
-        "QTableWidget { background-color: rgba(255, 255, 255, 20);"
-        " border: none; gridline-color: rgba(255, 255, 255, 25); color: white;"
-        " alternate-background-color: rgba(255, 255, 255, 12); }"
-        "QHeaderView::section { background-color: transparent; color: #94a3b8;"
-        " border: none; border-bottom: 1px solid rgba(255, 255, 255, 40);"
-        " padding: 6px; font-weight: bold; }");
 
     for (int r = 0; r < rows.size(); ++r)
         for (int c = 0; c < rows[r].size() && c < headers.size(); ++c)
@@ -194,9 +163,9 @@ protected:
 
         for (int i = 0; i <= 4; ++i) {
             const double y = area.bottom() - area.height() * i / 4.0;
-            p.setPen(QPen(QColor(255, 255, 255, 35), 1));
+            p.setPen(QPen(Theme::chartGrid(), 1));
             p.drawLine(QPointF(area.left(), y), QPointF(area.right(), y));
-            p.setPen(QColor(148, 163, 184));
+            p.setPen(Theme::muted());
             p.drawText(QRectF(0, y - 8, area.left() - 8, 16),
                        Qt::AlignRight | Qt::AlignVCenter, QString::number(i * 5));
         }
@@ -208,7 +177,7 @@ protected:
             pts << QPointF(x, y);
         }
 
-        p.setPen(QColor(148, 163, 184));
+        p.setPen(Theme::muted());
         for (int i = 0; i < n && i < m_labels.size(); ++i)
             p.drawText(QRectF(pts[i].x() - 25, area.bottom() + 6, 50, 16),
                        Qt::AlignCenter, m_labels[i]);
@@ -217,21 +186,21 @@ protected:
         path.moveTo(pts[0]);
         for (int i = 1; i < n; ++i)
             path.lineTo(pts[i]);
-        p.setPen(QPen(Qt::white, 2));
+        p.setPen(QPen(Theme::chartLine(), 2));
         p.setBrush(Qt::NoBrush);
         p.drawPath(path);
 
-        p.setPen(QPen(QColor(15, 15, 15), 2));
-        p.setBrush(Qt::white);
+        p.setPen(QPen(Theme::background(), 2));
+        p.setBrush(Theme::chartLine());
         for (const QPointF &pt : pts)
             p.drawEllipse(pt, 4, 4);
 
         const QPointF last = pts.last();
         const QRectF tip(qMin(last.x() - 50, width() - 120.0), last.y() - 52, 110, 40);
-        p.setPen(QPen(QColor(255, 255, 255, 70), 1));
-        p.setBrush(QColor(15, 15, 15, 230));
+        p.setPen(QPen(Theme::chartGrid(), 1));
+        p.setBrush(Theme::tooltipBg());
         p.drawRoundedRect(tip, 8, 8);
-        p.setPen(Qt::white);
+        p.setPen(Theme::text());
         p.drawText(tip.adjusted(10, 4, -10, -4), Qt::AlignLeft | Qt::AlignTop,
                    m_labels.last() + "\n" + QString::number(m_values.last()) + " emprunts");
     }
@@ -295,7 +264,7 @@ protected:
         big.setPixelSize(static_cast<int>(side * 0.22));
         big.setBold(true);
         p.setFont(big);
-        p.setPen(Qt::white);
+        p.setPen(Theme::text());
 
         const QRectF valueRect(inner.left(), inner.center().y() - inner.height() * 0.35,
                                inner.width(), inner.height() * 0.4);
@@ -304,7 +273,7 @@ protected:
         QFont small = font();
         small.setPixelSize(static_cast<int>(side * 0.08));
         p.setFont(small);
-        p.setPen(QColor(148, 163, 184));
+        p.setPen(Theme::muted());
 
         const QRectF labelRect(inner.left(), inner.center().y() + inner.height() * 0.05,
                                inner.width(), inner.height() * 0.3);
@@ -324,49 +293,41 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    Theme::setDark(true);            // thème sombre au démarrage
     ui->setupUi(this);
     setWindowTitle("Gestion des emprunts de matériels informatiques");
+    m_store = new DataStore;   // créé avant les pages, car elles en ont besoin
 
-    const QColor accent(255, 255, 255);   // blanc
+    const QColor accent(135, 206, 235);
 
-    // Logo et icône du Tableau de bord
+    // Logo : remplacez logoLabel par le objectName exact de votre QLabel du logo
     ui->logoLabel->setPixmap(loadTinted("departement-it.png", accent));
     ui->logoLabel->setScaledContents(true);
 
-    ui->NavDashBoard->setIcon(QIcon(loadTinted("lanalyse-des-donnees.png", accent)));
-    ui->NavDashBoard->setIconSize(QSize(20, 20));
-
-    ui->NavEtudiant->setIcon(QIcon(loadTinted("etudiant.png", accent)));
-    ui->NavEtudiant->setIconSize(QSize(20, 20));
-
-    ui->NavMateriels->setIcon(QIcon(loadTinted("ordinateur-personnel.png", accent)));
-    ui->NavMateriels->setIconSize(QSize(20, 20));
-
-    ui->NavEmprunts->setIcon(QIcon(loadTinted("chaine-de-produits.png", accent)));
-    ui->NavEmprunts->setIconSize(QSize(20, 20));
-
-    ui->NavRetours->setIcon(QIcon(loadTinted("boite-de-retour.png", accent)));
-    ui->NavRetours->setIconSize(QSize(20, 20));
-
+    // Icônes des boutons de navigation
+    auto setNavIcon = [&](QPushButton *b, const QString &file) {
+        b->setIcon(QIcon(loadTinted(file, accent)));
+        b->setIconSize(QSize(20, 20));
+    };
+    setNavIcon(ui->NavDashBoard, "lanalyse-des-donnees.png");
+    setNavIcon(ui->NavMateriels, "ordinateur-personnel.png");
+    setNavIcon(ui->NavEtudiant,  "etudiant.png");
+    setNavIcon(ui->NavEmprunts,  "chaine-de-produits.png");
+    setNavIcon(ui->NavRetours,   "boite-de-retour.png");
 
     // Image de fond
     ui->zoomBg->setMapImage(ICON_DIR + "typo.jpg");
 
     // Pages à droite de la barre latérale
     m_pages = new QStackedWidget(ui->zoomBg);
-
+    m_pages->installEventFilter(this);
+    ui->sidebar->installEventFilter(this);
     m_pages->addWidget(makeDashboardPage());          // 0 : tableau de bord
 
-    MaterielsPage *materiels = new MaterielsPage;
-    m_pages->addWidget(materiels);                      // 1 : matériels
+       MaterielsPage *materiels = new MaterielsPage(m_store);
+    m_pages->addWidget(materiels);                    // 1 : matériels
 
-    // Double-clic sur un matériel disponible et « Oui » : ouvre la page Emprunts
-    connect(materiels, &MaterielsPage::emprunterRequested, this, [this](const QString &name) {
-        m_emprunts->prefillMaterial(name);
-        showPage(3);
-    });
-
-    m_pages->addWidget(makeTablePage("Étudiants",     // 2
+    m_pages->addWidget(makeTablePage("Étudiants",     // 2 : étudiants
                                      { "ID", "Nom", "Prénom", "N° étudiant" },
                                      {
                                          { "1", "Rakoto",        "Miora", "ETU001" },
@@ -375,15 +336,12 @@ MainWindow::MainWindow(QWidget *parent)
                                          { "4", "Razafindrabe",  "Tiana", "ETU004" },
                                          { "5", "Rakotomamonjy", "Sarah", "ETU005" }
                                      }));
-    // 3 : Emprunts (données partagées et formulaire)
-    m_store = new DataStore;
+
     m_emprunts = new EmpruntsPage(m_store);
-    m_pages->addWidget(m_emprunts);
+    m_pages->addWidget(m_emprunts);                   // 3 : emprunts
     connect(m_emprunts, &EmpruntsPage::navigateToStudents, this, [this] { showPage(2); });
 
-    QLabel *retours = new QLabel("Retours : page à venir");
-    retours->setAlignment(Qt::AlignCenter);
-    m_pages->addWidget(retours);                      // 4 : retours
+        m_pages->addWidget(new RetoursPage(m_store));     // 4 : retours
 
     // Au départ, le menu, les pages et l'interrupteur sont cachés
     ui->sidebar->hide();
@@ -393,32 +351,46 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->zoomBg, &ZoomBackground::dashboardVisible,
             this, &MainWindow::setDashboardVisible);
 
-    // Interrupteur : inverse les couleurs du fond
-    connect(ui->toggleTheme, &QAbstractButton::toggled,
-            ui->zoomBg, &ZoomBackground::setInverted);
+    // Interrupteur : change le thème de toute l'application et le fond
+    connect(ui->toggleTheme, &QAbstractButton::toggled, this, [this](bool on) {
+        Theme::setDark(!on);           // interrupteur activé = mode clair
+        ui->zoomBg->setInverted(on);
+        for (QWidget *w : findChildren<QWidget *>())
+            w->update();
+    });
 
-    // ----- Navigation : la position dans m_navs correspond au numéro de page -----
-    // 0 = Tableau de bord, 1 = Matériels, 2 = Étudiants (pas de bouton), 3 = Emprunts, 4 = Retours
-    m_navs = { ui->NavDashBoard, ui->NavMateriels, nullptr, ui->NavEmprunts, nullptr };
+    // Double-clic sur un matériel et « Oui » : ouvre Emprunts avec le matériel rempli
+    connect(materiels, &MaterielsPage::emprunterRequested, this, [this](const QString &name) {
+        m_emprunts->prefillMaterial(name);
+        showPage(3);
+    });
+
+    // Navigation : la position dans m_navs correspond au numéro de page
+    m_navs = { ui->NavDashBoard, ui->NavMateriels, ui->NavEtudiant,
+              ui->NavEmprunts,  ui->NavRetours };
 
     for (int i = 0; i < m_navs.size(); ++i) {
-        if (!m_navs[i])
-            continue;
         m_navs[i]->setCheckable(true);
         connect(m_navs[i], &QPushButton::clicked, this, [this, i] { showPage(i); });
     }
 
     showPage(0);
-    connect(ui->NavMateriels, &QPushButton::clicked, this, [this] { showPage(1); });
-
-    showPage(0);
-
     layoutInside();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *ev)
+{
+    // La molette ne doit pas zoomer quand elle est sur le menu ou sur une page
+    // (les tableaux gèrent leur propre défilement, donc ils ne sont pas concernés)
+    if (ev->type() == QEvent::Wheel && (obj == m_pages || obj == ui->sidebar))
+        return true;
+
+    return QMainWindow::eventFilter(obj, ev);
 }
 
 void MainWindow::setDashboardVisible(bool show)
@@ -447,8 +419,7 @@ void MainWindow::showPage(int index)
     m_pages->setCurrentIndex(index);
 
     for (int i = 0; i < m_navs.size(); ++i)
-        if (m_navs[i])
-            m_navs[i]->setChecked(i == index);
+        m_navs[i]->setChecked(i == index);
 }
 
 QWidget *MainWindow::makeDashboardPage()
@@ -456,13 +427,12 @@ QWidget *MainWindow::makeDashboardPage()
     QWidget *page = new QWidget;
     page->setAttribute(Qt::WA_TranslucentBackground);
     page->setAutoFillBackground(false);
-    page->setStyleSheet(DASH_QSS);
 
     auto *root = new QVBoxLayout(page);
     root->setContentsMargins(22, 20, 22, 20);
     root->setSpacing(14);
 
-    QLabel *h1 = new QLabel("Bon Visionnage!");
+    QLabel *h1 = new QLabel("Bon visionnage");
     h1->setObjectName("h1");
     QLabel *sub = new QLabel("Voici un aperçu de l'état actuel du système.");
     sub->setObjectName("sub");
@@ -511,10 +481,9 @@ QWidget *MainWindow::makeDashboardPage()
 
     const QStringList names  = { "PC Portable", "PC Fixe", "Écran", "Clavier", "Souris" };
     const QStringList counts = { "12 (37%)", "8 (25%)", "6 (19%)", "4 (13%)", "2 (6%)" };
-    const QStringList hexes  = { "#f1f5f9", "#cbd5e1", "#94a3b8", "#64748b", "#334155" };
 
     QList<QColor> colors;
-    for (const QString &h : hexes)
+    for (const QString &h : PIE_COLORS)
         colors << QColor(h);
 
     Donut *donut = new Donut;
@@ -527,7 +496,7 @@ QWidget *MainWindow::makeDashboardPage()
     for (int i = 0; i < names.size(); ++i) {
         QLabel *dot = new QLabel;
         dot->setFixedSize(10, 10);
-        dot->setStyleSheet(QString("background-color: %1; border-radius: 5px;").arg(hexes[i]));
+        dot->setStyleSheet(QString("background-color: %1; border-radius: 5px;").arg(PIE_COLORS[i]));
 
         QLabel *name = new QLabel(names[i]);
         name->setObjectName("legend");
@@ -566,11 +535,6 @@ QWidget *MainWindow::makeDashboardPage()
             { "18/10/2026 09:12", "Rakotomalala H.",     "PC Fixe",     "7 jours", "Retourné" }
         });
 
-    for (int r = 0; r < table->rowCount(); ++r) {
-        QTableWidgetItem *it = table->item(r, 4);
-        it->setForeground(it->text().startsWith("En") ? QColor("#93c5fd") : QColor("#94a3b8"));
-    }
-
     tl->addWidget(table, 1);
     bottom->addWidget(tableCard, 3);
 
@@ -586,6 +550,7 @@ QWidget *MainWindow::makeDashboardPage()
         QPushButton *b = new QPushButton(a + "            ›");
         b->setObjectName("action");
         b->setCursor(Qt::PointingHandCursor);
+        b->setMinimumHeight(40);
         al->addWidget(b);
     }
     al->addStretch();
@@ -609,8 +574,7 @@ QWidget *MainWindow::makeTablePage(const QString &title,
     layout->setSpacing(14);
 
     QLabel *titleLabel = new QLabel(title);
-    titleLabel->setStyleSheet("font-size: 22px; font-weight: bold; color: white;"
-                              " background: transparent;");
+    titleLabel->setObjectName("pageTitle");
     layout->addWidget(titleLabel);
     layout->addWidget(makeTable(headers, rows), 1);
 
@@ -634,8 +598,6 @@ void MainWindow::layoutInside()
     const int H = ui->zoomBg->height();
 
     ui->sidebar->setGeometry(0, 0, SIDEBAR_WIDTH, H);
-
-    // Les pages commencent sous la zone de la bascule
     m_pages->setGeometry(SIDEBAR_WIDTH, TOP_BAR, W - SIDEBAR_WIDTH, H - TOP_BAR);
 
     ui->toggleTheme->move(W - ui->toggleTheme->width() - 25, 25);

@@ -1,6 +1,3 @@
-#ifndef EMPRUNTSPAGE_H
-#define EMPRUNTSPAGE_H
-
 #pragma once
 
 #include <QWidget>
@@ -39,5 +36,3 @@ private:
     QFrame *m_summary = nullptr;
     QLabel *m_summaryText = nullptr;
 };
-
-#endif // EMPRUNTSPAGE_H

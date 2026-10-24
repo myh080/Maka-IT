@@ -10,54 +10,12 @@
 #include <QPixmap>
 #include <QMessageBox>
 
-namespace {
-const char *DIALOG_QSS = R"CSS(
-QDialog { background-color: #0b0f17; border: 1px solid #38bdf8; }
-QLabel { color: #e5e7eb; background: transparent; }
-QLabel#dlgTitle { font-size: 18px; font-weight: bold; color: white; }
-QLabel#preview {
-    background-color: rgba(56, 189, 248, 18);
-    border: 1px dashed #38bdf8;
-    border-radius: 10px;
-    color: #94a3b8;
-}
-QLineEdit, QComboBox {
-    background-color: rgba(255, 255, 255, 15);
-    border: 1px solid rgba(56, 189, 248, 90);
-    border-radius: 8px;
-    padding: 7px 10px;
-    color: white;
-}
-QComboBox QAbstractItemView {
-    background-color: #0b0f17;
-    color: white;
-    selection-background-color: rgba(56, 189, 248, 80);
-}
-QPushButton#secondary {
-    background: transparent;
-    color: #cbd5e1;
-    border: 1px solid rgba(255, 255, 255, 50);
-    border-radius: 8px;
-    padding: 8px 14px;
-}
-QPushButton#primary {
-    background-color: rgba(56, 189, 248, 70);
-    color: white;
-    border: 1px solid #38bdf8;
-    border-radius: 8px;
-    padding: 8px 14px;
-    font-weight: bold;
-}
-)CSS";
-}
-
-AddMaterielDialog::AddMaterielDialog(const QStringList &categories, QWidget *parent)
+AddMaterielDialog::AddMaterielDialog(const QList<Category> &categories, QWidget *parent)
     : QDialog(parent)
 {
     setWindowTitle("Nouveau matériel");
     setModal(true);
     setMinimumWidth(380);
-    setStyleSheet(DIALOG_QSS);
 
     auto *root = new QVBoxLayout(this);
     root->setContentsMargins(22, 20, 22, 20);
@@ -67,7 +25,6 @@ AddMaterielDialog::AddMaterielDialog(const QStringList &categories, QWidget *par
     title->setObjectName("dlgTitle");
     root->addWidget(title);
 
-    // Zone photo
     m_preview = new QLabel("Aucune photo");
     m_preview->setObjectName("preview");
     m_preview->setAlignment(Qt::AlignCenter);
@@ -80,19 +37,28 @@ AddMaterielDialog::AddMaterielDialog(const QStringList &categories, QWidget *par
     connect(pick, &QPushButton::clicked, this, &AddMaterielDialog::choosePhoto);
     root->addWidget(pick);
 
-    // Nom
-    root->addWidget(new QLabel("Nom"));
-    m_name = new QLineEdit;
-    m_name->setPlaceholderText("Ex : Arduino Uno R3");
-    root->addWidget(m_name);
+    QLabel *lDes = new QLabel("Désignation");
+    lDes->setObjectName("field");
+    root->addWidget(lDes);
+    m_designation = new QLineEdit;
+    m_designation->setPlaceholderText("Ex : Arduino Uno R3");
+    root->addWidget(m_designation);
 
-    // Catégorie
-    root->addWidget(new QLabel("Catégorie"));
+    QLabel *lSer = new QLabel("Numéro de série");
+    lSer->setObjectName("field");
+    root->addWidget(lSer);
+    m_serial = new QLineEdit;
+    m_serial->setPlaceholderText("Ex : A0001-00999");
+    root->addWidget(m_serial);
+
+    QLabel *lCat = new QLabel("Catégorie");
+    lCat->setObjectName("field");
+    root->addWidget(lCat);
     m_cat = new QComboBox;
-    m_cat->addItems(categories);
+    for (const Category &c : categories)
+        m_cat->addItem(c.libelle, c.id);
     root->addWidget(m_cat);
 
-    // Boutons
     auto *buttons = new QHBoxLayout;
     buttons->addStretch();
 
@@ -109,28 +75,37 @@ AddMaterielDialog::AddMaterielDialog(const QStringList &categories, QWidget *par
     root->addLayout(buttons);
 
     connect(cancel, &QPushButton::clicked, this, &QDialog::reject);
-    connect(ok, &QPushButton::clicked, this, [this] {
-        if (m_name->text().trimmed().isEmpty()) {
-            QMessageBox::warning(this, "Champ requis", "Veuillez saisir le nom du matériel.");
-            return;
-        }
-        accept();
-    });
+    connect(ok, &QPushButton::clicked, this, &AddMaterielDialog::validateAndAccept);
 }
 
-QString AddMaterielDialog::name() const
+QString AddMaterielDialog::designation() const
 {
-    return m_name->text().trimmed();
+    return m_designation->text().trimmed();
 }
 
-QString AddMaterielDialog::category() const
+QString AddMaterielDialog::numeroSerie() const
 {
-    return m_cat->currentText();
+    return m_serial->text().trimmed();
+}
+
+int AddMaterielDialog::categoryId() const
+{
+    return m_cat->currentData().toInt();
 }
 
 QString AddMaterielDialog::photoPath() const
 {
     return m_photo;
+}
+
+void AddMaterielDialog::validateAndAccept()
+{
+    if (designation().isEmpty() || numeroSerie().isEmpty()) {
+        QMessageBox::warning(this, "Champs requis",
+                             "Veuillez saisir la désignation et le numéro de série.");
+        return;
+    }
+    accept();
 }
 
 void AddMaterielDialog::choosePhoto()
