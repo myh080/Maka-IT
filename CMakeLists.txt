@@ -30,6 +30,8 @@ add_executable(Maka_IT
     zoombackground.h
     toggleswitch.cpp
     toggleswitch.h
+    dashboardpage.h dashboardpage.cpp
+    studentspage.h studentspage.cpp
 )
 
 target_link_libraries(Maka_IT PRIVATE Qt6::Widgets Qt6::Sql)

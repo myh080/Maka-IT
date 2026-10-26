@@ -202,6 +202,30 @@ addmaterieldialog.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.s
 .PHONY : addmaterieldialog.cpp.s
 
+dashboardpage.obj: dashboardpage.cpp.obj
+.PHONY : dashboardpage.obj
+
+# target to build an object file
+dashboardpage.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj
+.PHONY : dashboardpage.cpp.obj
+
+dashboardpage.i: dashboardpage.cpp.i
+.PHONY : dashboardpage.i
+
+# target to preprocess a source file
+dashboardpage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/dashboardpage.cpp.i
+.PHONY : dashboardpage.cpp.i
+
+dashboardpage.s: dashboardpage.cpp.s
+.PHONY : dashboardpage.s
+
+# target to generate assembly for a file
+dashboardpage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/dashboardpage.cpp.s
+.PHONY : dashboardpage.cpp.s
+
 datastore.obj: datastore.cpp.obj
 .PHONY : datastore.obj
 
@@ -346,6 +370,30 @@ retourspage.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/retourspage.cpp.s
 .PHONY : retourspage.cpp.s
 
+studentspage.obj: studentspage.cpp.obj
+.PHONY : studentspage.obj
+
+# target to build an object file
+studentspage.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/studentspage.cpp.obj
+.PHONY : studentspage.cpp.obj
+
+studentspage.i: studentspage.cpp.i
+.PHONY : studentspage.i
+
+# target to preprocess a source file
+studentspage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/studentspage.cpp.i
+.PHONY : studentspage.cpp.i
+
+studentspage.s: studentspage.cpp.s
+.PHONY : studentspage.s
+
+# target to generate assembly for a file
+studentspage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Maka_IT.dir\build.make CMakeFiles/Maka_IT.dir/studentspage.cpp.s
+.PHONY : studentspage.cpp.s
+
 theme.obj: theme.cpp.obj
 .PHONY : theme.obj
 
@@ -435,6 +483,9 @@ help:
 	@echo ... addmaterieldialog.obj
 	@echo ... addmaterieldialog.i
 	@echo ... addmaterieldialog.s
+	@echo ... dashboardpage.obj
+	@echo ... dashboardpage.i
+	@echo ... dashboardpage.s
 	@echo ... datastore.obj
 	@echo ... datastore.i
 	@echo ... datastore.s
@@ -453,6 +504,9 @@ help:
 	@echo ... retourspage.obj
 	@echo ... retourspage.i
 	@echo ... retourspage.s
+	@echo ... studentspage.obj
+	@echo ... studentspage.i
+	@echo ... studentspage.s
 	@echo ... theme.obj
 	@echo ... theme.i
 	@echo ... theme.s

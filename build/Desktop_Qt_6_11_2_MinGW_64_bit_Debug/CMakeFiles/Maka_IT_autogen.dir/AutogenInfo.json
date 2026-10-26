@@ -397,6 +397,12 @@
 			null
 		],
 		[
+			"H:/Qt project/Maka_IT/dashboardpage.h",
+			"MU",
+			"EWIEGA46WW/moc_dashboardpage.cpp",
+			null
+		],
+		[
 			"H:/Qt project/Maka_IT/datastore.h",
 			"MU",
 			"EWIEGA46WW/moc_datastore.cpp",
@@ -424,6 +430,12 @@
 			"H:/Qt project/Maka_IT/retourspage.h",
 			"MU",
 			"EWIEGA46WW/moc_retourspage.cpp",
+			null
+		],
+		[
+			"H:/Qt project/Maka_IT/studentspage.h",
+			"MU",
+			"EWIEGA46WW/moc_studentspage.cpp",
 			null
 		],
 		[
@@ -521,12 +533,14 @@
 	"SOURCES" : 
 	[
 		[ "H:/Qt project/Maka_IT/addmaterieldialog.cpp", "MU", null ],
+		[ "H:/Qt project/Maka_IT/dashboardpage.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/datastore.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/empruntspage.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/main.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/mainwindow.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/materielspage.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/retourspage.cpp", "MU", null ],
+		[ "H:/Qt project/Maka_IT/studentspage.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/theme.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/toggleswitch.cpp", "MU", null ],
 		[ "H:/Qt project/Maka_IT/zoombackground.cpp", "MU", null ]

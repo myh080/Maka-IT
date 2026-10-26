@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include <QList>
+#include <QPoint>
 #include "datastore.h"
 
 class QEvent;
@@ -19,7 +20,7 @@ public:
     explicit MaterielsPage(DataStore *store, QWidget *parent = nullptr);
 
 signals:
-    void emprunterRequested(const QString &designation);
+    void emprunterRequested(int materielId);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev) override;
@@ -31,10 +32,11 @@ private:
     void loadMaterials();
     QFrame *makeCard(const MaterialRow &row, int index);
     void onCardDoubleClicked(int index);
+    void onCardContextMenu(int index, const QPoint &globalPos);
     void onAddClicked();
 
     DataStore *m_store = nullptr;
-    QList<Category> m_categories;      // « Tous » en premier
+    QList<Category> m_categories;
     QList<QFrame *> m_catRows;
     QList<MaterialRow> m_rows;
     QList<QFrame *> m_cards;

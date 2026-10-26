@@ -42,7 +42,7 @@ template <> constexpr inline auto EmpruntsPage::qt_create_metaobjectdata<qt_meta
         "navigateToStudents",
         "",
         "loanCreated",
-        "material"
+        "designation"
     };
 
     QtMocHelpers::UintData qt_methods {

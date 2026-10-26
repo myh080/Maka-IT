@@ -1,6 +1,7 @@
 Maka_IT_autogen/timestamp: \
 	C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
 	C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+	C:/Qt/6.11.2/mingw_64/include/QtCore/QPoint \
 	C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
 	C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
 	C:/Qt/6.11.2/mingw_64/include/QtCore/QTimer \
@@ -649,6 +650,8 @@ Maka_IT_autogen/timestamp: \
 	H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake \
 	H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/3.30.5/CMakeSystem.cmake \
 	H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autogen/moc_predefs.h \
+	H:/Qt\ project/Maka_IT/dashboardpage.cpp \
+	H:/Qt\ project/Maka_IT/dashboardpage.h \
 	H:/Qt\ project/Maka_IT/datastore.cpp \
 	H:/Qt\ project/Maka_IT/datastore.h \
 	H:/Qt\ project/Maka_IT/empruntspage.cpp \
@@ -660,6 +663,8 @@ Maka_IT_autogen/timestamp: \
 	H:/Qt\ project/Maka_IT/materielspage.h \
 	H:/Qt\ project/Maka_IT/retourspage.cpp \
 	H:/Qt\ project/Maka_IT/retourspage.h \
+	H:/Qt\ project/Maka_IT/studentspage.cpp \
+	H:/Qt\ project/Maka_IT/studentspage.h \
 	H:/Qt\ project/Maka_IT/theme.cpp \
 	H:/Qt\ project/Maka_IT/theme.h \
 	H:/Qt\ project/Maka_IT/toggleswitch.cpp \

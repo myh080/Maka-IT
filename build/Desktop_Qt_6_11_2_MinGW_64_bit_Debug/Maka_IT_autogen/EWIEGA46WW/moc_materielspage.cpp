@@ -41,13 +41,13 @@ template <> constexpr inline auto MaterielsPage::qt_create_metaobjectdata<qt_met
         "MaterielsPage",
         "emprunterRequested",
         "",
-        "designation"
+        "materielId"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Signal 'emprunterRequested'
-        QtMocHelpers::SignalData<void(const QString &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 3 },
+        QtMocHelpers::SignalData<void(int)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 3 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -72,12 +72,12 @@ void MaterielsPage::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     auto *_t = static_cast<MaterielsPage *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->emprunterRequested((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 0: _t->emprunterRequested((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
-        if (QtMocHelpers::indexOfMethod<void (MaterielsPage::*)(const QString & )>(_a, &MaterielsPage::emprunterRequested, 0))
+        if (QtMocHelpers::indexOfMethod<void (MaterielsPage::*)(int )>(_a, &MaterielsPage::emprunterRequested, 0))
             return;
     }
 }
@@ -114,7 +114,7 @@ int MaterielsPage::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void MaterielsPage::emprunterRequested(const QString & _t1)
+void MaterielsPage::emprunterRequested(int _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1);
 }

@@ -281,6 +281,18 @@ CMakeFiles/Maka_IT.dir/datastore.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qstringbuilder.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qstringconverter.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qstringconverter_base.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qstringlist.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qlist.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qhashfunctions.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/numeric \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_numeric.h \
+ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qiterator.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qbytearraylist.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qalgorithms.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/q20bit.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qstringmatcher.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
@@ -294,13 +306,7 @@ CMakeFiles/Maka_IT.dir/datastore.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qiodevicebase.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qscopedpointer.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qfloat16.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qhashfunctions.h \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/numeric \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_numeric.h \
- C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qmath.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qalgorithms.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/q20bit.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qtformat_impl.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qiterable.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qtaggedpointer.h \
@@ -330,11 +336,6 @@ CMakeFiles/Maka_IT.dir/datastore.cpp.obj: \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_multiset.h \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qlist.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qiterator.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qbytearraylist.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qstringlist.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qstringmatcher.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qmap.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qshareddata_impl.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qset.h \
@@ -358,4 +359,5 @@ CMakeFiles/Maka_IT.dir/datastore.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtSql/QSqlError \
  C:/Qt/6.11.2/mingw_64/include/QtSql/qsqlerror.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QVariant \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QMap \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDebug

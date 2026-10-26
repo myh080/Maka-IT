@@ -22,6 +22,9 @@
 #include <QMessageBox>
 #include <QStyle>
 #include <utility>
+#include <QMenu>
+#include <QAction>
+#include <QContextMenuEvent>
 
 namespace {
 
@@ -320,11 +323,64 @@ QFrame *MaterielsPage::makeCard(const MaterialRow &row, int index)
 
 bool MaterielsPage::eventFilter(QObject *obj, QEvent *ev)
 {
-    if (ev->type() == QEvent::MouseButtonDblClick && obj->property("index").isValid()) {
-        onCardDoubleClicked(obj->property("index").toInt());
+    if (!obj->property("index").isValid())
+        return QWidget::eventFilter(obj, ev);
+
+    const int index = obj->property("index").toInt();
+
+    if (ev->type() == QEvent::MouseButtonDblClick) {
+        onCardDoubleClicked(index);
         return true;
     }
+
+    if (ev->type() == QEvent::ContextMenu) {
+        auto *cm = static_cast<QContextMenuEvent *>(ev);
+        onCardContextMenu(index, cm->globalPos());
+        return true;
+    }
+
     return QWidget::eventFilter(obj, ev);
+}
+
+void MaterielsPage::onCardContextMenu(int index, const QPoint &globalPos)
+{
+    if (index < 0 || index >= m_rows.size())
+        return;
+
+    const MaterialRow row = m_rows[index];
+    const bool disponible = (row.etat == "disponible");
+    const bool endommage  = (row.etat == "endommage");
+    const bool emprunte   = (row.etat == "emprunte");
+
+    QMenu menu(this);
+
+    QAction *damage = menu.addAction("Marquer endommagé");
+    damage->setEnabled(disponible);
+
+    QAction *repair = menu.addAction("Marquer réparé (redevient disponible)");
+    repair->setEnabled(endommage);
+
+    if (emprunte) {
+        QAction *info = menu.addAction("Matériel emprunté : retour depuis la page Retours");
+        info->setEnabled(false);
+    }
+
+    QAction *chosen = menu.exec(globalPos);
+
+    QString newState;
+    if (chosen == damage)
+        newState = "endommage";
+    else if (chosen == repair)
+        newState = "disponible";
+    else
+        return;
+
+    if (!m_store->setMaterialState(row.id, newState)) {
+        QMessageBox::critical(this, "Erreur", "Le statut n'a pas pu être modifié.");
+        return;
+    }
+
+    loadMaterials();
 }
 
 void MaterielsPage::onCardDoubleClicked(int index)
@@ -353,7 +409,7 @@ void MaterielsPage::onCardDoubleClicked(int index)
         QMessageBox::Yes | QMessageBox::No);
 
     if (answer == QMessageBox::Yes)
-        emit emprunterRequested(row.designation);
+        emit emprunterRequested(row.id);
 }
 
 void MaterielsPage::onAddClicked()

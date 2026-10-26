@@ -240,6 +240,36 @@ CMakeFiles/Maka_IT.dir/toggleswitch.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/toggleswitch.cpp.s"
 	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\toggleswitch.cpp" -o CMakeFiles\Maka_IT.dir\toggleswitch.cpp.s
 
+CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
+CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
+CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj: H:/Qt\ project/Maka_IT/dashboardpage.cpp
+CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj -MF CMakeFiles\Maka_IT.dir\dashboardpage.cpp.obj.d -o CMakeFiles\Maka_IT.dir\dashboardpage.cpp.obj -c "H:\Qt project\Maka_IT\dashboardpage.cpp"
+
+CMakeFiles/Maka_IT.dir/dashboardpage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Maka_IT.dir/dashboardpage.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "H:\Qt project\Maka_IT\dashboardpage.cpp" > CMakeFiles\Maka_IT.dir\dashboardpage.cpp.i
+
+CMakeFiles/Maka_IT.dir/dashboardpage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/dashboardpage.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\dashboardpage.cpp" -o CMakeFiles\Maka_IT.dir\dashboardpage.cpp.s
+
+CMakeFiles/Maka_IT.dir/studentspage.cpp.obj: CMakeFiles/Maka_IT.dir/flags.make
+CMakeFiles/Maka_IT.dir/studentspage.cpp.obj: CMakeFiles/Maka_IT.dir/includes_CXX.rsp
+CMakeFiles/Maka_IT.dir/studentspage.cpp.obj: H:/Qt\ project/Maka_IT/studentspage.cpp
+CMakeFiles/Maka_IT.dir/studentspage.cpp.obj: CMakeFiles/Maka_IT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Maka_IT.dir/studentspage.cpp.obj"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Maka_IT.dir/studentspage.cpp.obj -MF CMakeFiles\Maka_IT.dir\studentspage.cpp.obj.d -o CMakeFiles\Maka_IT.dir\studentspage.cpp.obj -c "H:\Qt project\Maka_IT\studentspage.cpp"
+
+CMakeFiles/Maka_IT.dir/studentspage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Maka_IT.dir/studentspage.cpp.i"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "H:\Qt project\Maka_IT\studentspage.cpp" > CMakeFiles\Maka_IT.dir\studentspage.cpp.i
+
+CMakeFiles/Maka_IT.dir/studentspage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Maka_IT.dir/studentspage.cpp.s"
+	C:\Qt\Tools\mingw1310_64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "H:\Qt project\Maka_IT\studentspage.cpp" -o CMakeFiles\Maka_IT.dir\studentspage.cpp.s
+
 # Object files for target Maka_IT
 Maka_IT_OBJECTS = \
 "CMakeFiles/Maka_IT.dir/Maka_IT_autogen/mocs_compilation.cpp.obj" \
@@ -252,7 +282,9 @@ Maka_IT_OBJECTS = \
 "CMakeFiles/Maka_IT.dir/datastore.cpp.obj" \
 "CMakeFiles/Maka_IT.dir/theme.cpp.obj" \
 "CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj" \
-"CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj"
+"CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj" \
+"CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj" \
+"CMakeFiles/Maka_IT.dir/studentspage.cpp.obj"
 
 # External object files for target Maka_IT
 Maka_IT_EXTERNAL_OBJECTS =
@@ -268,6 +300,8 @@ Maka_IT.exe: CMakeFiles/Maka_IT.dir/datastore.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/theme.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/zoombackground.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/toggleswitch.cpp.obj
+Maka_IT.exe: CMakeFiles/Maka_IT.dir/dashboardpage.cpp.obj
+Maka_IT.exe: CMakeFiles/Maka_IT.dir/studentspage.cpp.obj
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/build.make
 Maka_IT.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Widgets.a
 Maka_IT.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Sql.a
@@ -276,7 +310,7 @@ Maka_IT.exe: C:/Qt/6.11.2/mingw_64/lib/libQt6Core.a
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/linkLibs.rsp
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/objects1.rsp
 Maka_IT.exe: CMakeFiles/Maka_IT.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable Maka_IT.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="H:\Qt project\Maka_IT\build\Desktop_Qt_6_11_2_MinGW_64_bit_Debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Maka_IT.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Maka_IT.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -390,6 +390,7 @@ CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qlocale.h \
  H:\Qt\ project\Maka_IT\datastore.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QVBoxLayout \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qboxlayout.h \
@@ -410,12 +411,23 @@ CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qtextformat.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qtextoption.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QDateEdit \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdatetimeedit.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qtimezone.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QComboBox \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qcombobox.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstyleoption.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qvalidator.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qregularexpression.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qslider.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractslider.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstyle.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtabbar.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtabwidget.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qrubberband.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qabstractitemmodel.h \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QDateEdit \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdatetimeedit.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qtimezone.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QPushButton \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qpushbutton.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractbutton.h \
@@ -423,4 +435,30 @@ CMakeFiles/Maka_IT.dir/empruntspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMessageBox \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmessagebox.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdialog.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QShowEvent \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qcoreevent.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qbasictimer.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qabstracteventdispatcher.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qeventloop.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qdeadlinetimer.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvector2d.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qvectornd.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qpointingdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qinputdevice.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QObject \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QRect \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSize \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qnativeinterface.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qguiapplication.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qcoreapplication.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/qcoreapplication_platform.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qinputmethod.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/qguiapplication_platform.h

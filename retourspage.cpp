@@ -22,7 +22,6 @@
 #include <QPointF>
 #include <QColor>
 #include <algorithm>
-#include <utility>
 
 namespace {
 
@@ -107,17 +106,32 @@ RetoursPage::RetoursPage(DataStore *store, QWidget *parent)
     listTitle->setObjectName("cardTitle");
     ll->addWidget(listTitle);
 
-    m_table = new QTableWidget(0, 7);
-    m_table->setHorizontalHeaderLabels({ "#", "Étudiant", "Matériel", "Date d'emprunt",
-                                        "Retour prévu", "Statut", "Action" });
+    m_table = new QTableWidget(0, 9);
+    m_table->setHorizontalHeaderLabels({ "#", "Nom", "Prénom", "Matricule", "Matériel",
+                                        "Date d'emprunt", "Retour prévu", "Statut", "Action" });
     m_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_table->setSelectionMode(QAbstractItemView::NoSelection);
     m_table->setAlternatingRowColors(true);
     m_table->verticalHeader()->setVisible(false);
     m_table->verticalHeader()->setDefaultSectionSize(52);
-    m_table->horizontalHeader()->setStretchLastSection(true);
-    m_table->setColumnWidth(0, 50);
     m_table->viewport()->setAutoFillBackground(false);
+
+    // Largeurs : colonnes fixes pour le # et l'action, le matériel prend la place restante
+    QHeaderView *hh = m_table->horizontalHeader();
+    hh->setStretchLastSection(false);
+    hh->setMinimumSectionSize(50);
+    hh->setSectionResizeMode(0, QHeaderView::Fixed);
+    hh->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(4, QHeaderView::Stretch);
+    hh->setSectionResizeMode(5, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(6, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(7, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(8, QHeaderView::Fixed);
+    m_table->setColumnWidth(0, 44);
+    m_table->setColumnWidth(8, 130);
+
     ll->addWidget(m_table, 1);
 
     // Pied : nombre d'éléments par page et pagination
@@ -152,7 +166,7 @@ RetoursPage::RetoursPage(DataStore *store, QWidget *parent)
 
     root->addWidget(listCard, 1);
 
-    // ----- Connexions : chaque changement revient à la page 1 -----
+    // ----- Connexions : chaque changement de filtre revient à la page 1 -----
     connect(m_search, &QLineEdit::textChanged, this, [this](const QString &) {
         m_page = 0;
         applyFilters();
@@ -195,9 +209,9 @@ void RetoursPage::applyFilters()
     const int statusMode = m_status->currentIndex();   // 0 = tous, 1 = en cours, 2 = en retard
     const QDate today = QDate::currentDate();
 
-    // 1. Filtre : recherche et statut
+    // 1. Filtre : statut, puis recherche
     m_filtered.clear();
-    for (const ActiveLoan &l : std::as_const(m_all)) {
+    for (const ActiveLoan &l : m_all) {
         const bool late = lateDaysOf(l, today) > 0;
 
         if (statusMode == 1 && late)
@@ -206,7 +220,8 @@ void RetoursPage::applyFilters()
             continue;
 
         const bool match = needle.isEmpty()
-                           || l.nomComplet.contains(needle, Qt::CaseInsensitive)
+                           || l.nom.contains(needle, Qt::CaseInsensitive)
+                           || l.prenom.contains(needle, Qt::CaseInsensitive)
                            || l.matricule.contains(needle, Qt::CaseInsensitive)
                            || l.designation.contains(needle, Qt::CaseInsensitive)
                            || l.numeroSerie.contains(needle, Qt::CaseInsensitive);
@@ -224,7 +239,8 @@ void RetoursPage::applyFilters()
     m_table->setRowCount(0);
 
     const int start = m_page * perPage;
-        const int end = std::min(total, start + perPage);
+    const int end = std::min(total, start + perPage);
+
     for (int i = start; i < end; ++i) {
         const ActiveLoan &l = m_filtered[i];
         const int lateDays = lateDaysOf(l, today);
@@ -234,15 +250,17 @@ void RetoursPage::applyFilters()
         m_table->insertRow(r);
 
         m_table->setItem(r, 0, new QTableWidgetItem(QString::number(i + 1)));
-        m_table->setItem(r, 1, new QTableWidgetItem(l.nomComplet + "\n" + l.matricule));
-        m_table->setItem(r, 2, new QTableWidgetItem(l.designation + "\n" + l.numeroSerie));
-        m_table->setItem(r, 3, new QTableWidgetItem(l.dateEmprunt.toString("dd/MM/yyyy")));
-        m_table->setItem(r, 4, new QTableWidgetItem(l.dateRetourPrevue.toString("dd/MM/yyyy")));
+        m_table->setItem(r, 1, new QTableWidgetItem(l.nom));
+        m_table->setItem(r, 2, new QTableWidgetItem(l.prenom));
+        m_table->setItem(r, 3, new QTableWidgetItem(l.matricule));
+        m_table->setItem(r, 4, new QTableWidgetItem(l.designation + "\n" + l.numeroSerie));
+        m_table->setItem(r, 5, new QTableWidgetItem(l.dateEmprunt.toString("dd/MM/yyyy")));
+        m_table->setItem(r, 6, new QTableWidgetItem(l.dateRetourPrevue.toString("dd/MM/yyyy")));
 
         QTableWidgetItem *statut = new QTableWidgetItem(
             late ? QString("En retard de %1 j").arg(lateDays) : QString("En cours"));
         statut->setForeground(late ? QColor("#f87171") : QColor("#93c5fd"));
-        m_table->setItem(r, 5, statut);
+        m_table->setItem(r, 7, statut);
 
         QPushButton *btn = new QPushButton("Retourner");
         btn->setObjectName("primary");
@@ -250,11 +268,11 @@ void RetoursPage::applyFilters()
 
         const int id = l.id;
         const QString designation = l.designation;
-        const QString who = l.nomComplet;
+        const QString who = l.prenom + " " + l.nom;
         connect(btn, &QPushButton::clicked, this, [this, id, designation, who] {
             returnLoan(id, designation, who);
         });
-        m_table->setCellWidget(r, 6, btn);
+        m_table->setCellWidget(r, 8, btn);
     }
 
     m_pageLabel->setText(QString("Page %1 / %2").arg(m_page + 1).arg(pages));

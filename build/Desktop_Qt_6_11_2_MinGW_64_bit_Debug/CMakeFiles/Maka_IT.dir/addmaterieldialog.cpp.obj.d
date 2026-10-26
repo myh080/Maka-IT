@@ -388,6 +388,7 @@ CMakeFiles/Maka_IT.dir/addmaterieldialog.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
  H:\Qt\ project\Maka_IT\datastore.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \

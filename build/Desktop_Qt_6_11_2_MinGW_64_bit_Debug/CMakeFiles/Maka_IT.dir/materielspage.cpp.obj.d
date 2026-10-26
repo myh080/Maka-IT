@@ -385,8 +385,10 @@ CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QPoint \
  H:\Qt\ project\Maka_IT\datastore.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
@@ -476,4 +478,8 @@ CMakeFiles/Maka_IT.dir/materielspage.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMessageBox \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmessagebox.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QStyle
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QStyle \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/QMenu \
+ C:/Qt/6.11.2/mingw_64/include/QtWidgets/qmenu.h \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QAction \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QContextMenuEvent

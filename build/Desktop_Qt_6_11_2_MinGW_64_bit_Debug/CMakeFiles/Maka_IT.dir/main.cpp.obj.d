@@ -399,5 +399,4 @@ CMakeFiles/Maka_IT.dir/main.cpp.obj: H:\Qt\ project\Maka_IT\main.cpp \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qfontvariableaxis.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qsizepolicy.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtabwidget.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QList

@@ -1,7 +1,6 @@
 H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autogen/EWIEGA46WW/moc_mainwindow.cpp: H:/Qt\ project/Maka_IT/mainwindow.h \
   H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autogen/moc_predefs.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
-  C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q20bit.h \
   C:/Qt/6.11.2/mingw_64/include/QtCore/q20functional.h \

@@ -386,7 +386,6 @@ CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qcursor.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qbitmap.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtabwidget.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QList \
  H:/Qt\ project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/Maka_IT_autogen/include/ui_mainwindow.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QVariant \
@@ -434,28 +433,22 @@ CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: \
  H:/Qt\ project/Maka_IT/zoombackground.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QWidget \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QPixmap \
- H:\Qt\ project\Maka_IT\materielspage.h \
  H:\Qt\ project\Maka_IT\datastore.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QString \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QStringList \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDate \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qdatetime.h \
  C:/Qt/6.11.2/mingw_64/include/QtCore/qcalendar.h \
- H:\Qt\ project\Maka_IT\empruntspage.h H:\Qt\ project\Maka_IT\theme.h \
+ H:\Qt\ project\Maka_IT\dashboardpage.h \
+ H:\Qt\ project\Maka_IT\materielspage.h \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QPoint \
+ H:\Qt\ project\Maka_IT\studentspage.h \
+ H:\Qt\ project\Maka_IT\empruntspage.h \
+ H:\Qt\ project\Maka_IT\retourspage.h H:\Qt\ project\Maka_IT\theme.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QColor \
- H:\Qt\ project\Maka_IT\retourspage.h \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QStackedWidget \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstackedwidget.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QGraphicsOpacityEffect \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qgraphicseffect.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/QPropertyAnimation \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qpropertyanimation.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qvariantanimation.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qabstractanimation.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qeasingcurve.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/QEasingCurve \
  C:/Qt/6.11.2/mingw_64/include/QtWidgets/QPushButton \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QLabel \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QFrame \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QResizeEvent \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qevent.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qeventpoint.h \
@@ -471,35 +464,10 @@ CMakeFiles/Maka_IT.dir/mainwindow.cpp.obj: \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QSizeF \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QTransform \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qscreen_platform.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QTableWidget \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtablewidget.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtableview.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractitemview.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractscrollarea.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qabstractitemmodel.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qitemselectionmodel.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstyleoption.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
- C:/Qt/6.11.2/mingw_64/include/QtGui/qvalidator.h \
- C:/Qt/6.11.2/mingw_64/include/QtCore/qregularexpression.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qslider.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qabstractslider.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qstyle.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qtabbar.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qrubberband.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QTableWidgetItem \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QHeaderView \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/qheaderview.h \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QAbstractItemView \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QVBoxLayout \
- C:/Qt/6.11.2/mingw_64/include/QtWidgets/QHBoxLayout \
+ C:/Qt/6.11.2/mingw_64/include/QtCore/QEvent \
+ C:/Qt/6.11.2/mingw_64/include/QtGui/QIcon \
  C:/Qt/6.11.2/mingw_64/include/QtGui/QPainter \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpainter.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qtextoption.h \
  C:/Qt/6.11.2/mingw_64/include/QtGui/qpen.h \
- C:/Qt/6.11.2/mingw_64/include/QtGui/QPainterPath \
- C:/Qt/6.11.2/mingw_64/include/QtGui/qpainterpath.h \
- C:/Qt/6.11.2/mingw_64/include/QtGui/QPen \
- C:/Qt/6.11.2/mingw_64/include/QtGui/QIcon \
  C:/Qt/6.11.2/mingw_64/include/QtCore/QDebug
