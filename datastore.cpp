@@ -487,3 +487,61 @@ QList<Material> DataStore::listAvailableMaterials(int categoryId) const
 
     return out;
 }
+
+std::optional<Student> DataStore::findStudentByName(const QString &nom, const QString &prenom) const
+{
+    QSqlQuery q(db());
+    q.prepare("SELECT id_emprunteur, matricule, nom, prenom, telephone FROM emprunteur "
+              "WHERE nom = ? COLLATE NOCASE AND prenom = ? COLLATE NOCASE LIMIT 1");
+    q.addBindValue(nom);
+    q.addBindValue(prenom);
+
+    if (!run(q) || !q.next())
+        return std::nullopt;
+
+    return Student{ q.value(0).toInt(), q.value(1).toString(), q.value(2).toString(),
+                   q.value(3).toString(), q.value(4).toString() };
+}
+
+QString DataStore::nextSerialFor(int categoryId) const
+{
+    // Préfixe à partir du libellé de la catégorie : 3 premières lettres alphanumériques
+    QSqlQuery c(db());
+    c.prepare("SELECT libelle FROM categorie WHERE id_categorie = ?");
+    c.addBindValue(categoryId);
+
+    QString prefix = "MAT";
+    if (run(c) && c.next()) {
+        QString letters;
+        for (const QChar ch : c.value(0).toString()) {
+            if (ch.isLetter())
+                letters += ch.toUpper();
+            if (letters.size() == 3)
+                break;
+        }
+        if (letters.size() >= 2)
+            prefix = letters.leftJustified(3, 'X');
+    }
+
+    // Prochain numéro pour ce préfixe
+    QSqlQuery n(db());
+    n.prepare("SELECT COUNT(*) FROM materiel WHERE numero_serie LIKE ?");
+    n.addBindValue(prefix + "-%");
+
+    int next = 1;
+    if (run(n) && n.next())
+        next = n.value(0).toInt() + 1;
+
+    return QString("%1-%2").arg(prefix).arg(next, 4, 10, QChar('0'));
+}
+
+bool DataStore::updateMaterial(int materielId, const QString &designation, int categoryId)
+{
+    QSqlQuery q(db());
+    q.prepare("UPDATE materiel SET designation = ?, id_categorie = ? WHERE id_materiel = ?");
+    q.addBindValue(designation);
+    q.addBindValue(categoryId);
+    q.addBindValue(materielId);
+
+    return run(q) && q.numRowsAffected() == 1;
+}

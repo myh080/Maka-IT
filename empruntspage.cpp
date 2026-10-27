@@ -11,14 +11,101 @@
 #include <QFrame>
 #include <QMessageBox>
 #include <QShowEvent>
+#include <QIcon>
+#include <QPixmap>
+#include <QPainter>
+#include <QPen>
+#include <QColor>
+#include <QRectF>
+#include <QPointF>
 
 namespace {
 
-QLabel *fieldLabel(const QString &text)
+// Les deux cartes ont exactement la même taille
+constexpr int CARD_W = 400;
+constexpr int CARD_H = 540;
+
+// Icône de libellé dessinée en code, dans une couleur violette
+QIcon fieldIcon(const QString &name)
 {
-    QLabel *l = new QLabel(text);
-    l->setObjectName("field");
-    return l;
+    QPixmap pm(32, 32);
+    pm.fill(Qt::transparent);
+
+    QPainter p(&pm);
+    p.setRenderHint(QPainter::Antialiasing);
+    p.setPen(QPen(QColor("#a78bfa"), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.setBrush(Qt::NoBrush);
+
+    if (name == "box") {
+        p.drawRoundedRect(QRectF(6, 8, 20, 18), 3, 3);
+        p.drawLine(QPointF(6, 14), QPointF(26, 14));
+    } else if (name == "chip") {
+        p.drawRoundedRect(QRectF(9, 9, 14, 14), 2, 2);
+        p.drawLine(QPointF(13, 4), QPointF(13, 9));
+        p.drawLine(QPointF(19, 4), QPointF(19, 9));
+        p.drawLine(QPointF(13, 23), QPointF(13, 28));
+        p.drawLine(QPointF(19, 23), QPointF(19, 28));
+    } else if (name == "user") {
+        p.drawEllipse(QPointF(16, 11), 5, 5);
+        p.drawArc(QRectF(7, 18, 18, 12), 0, 180 * 16);
+    } else if (name == "users") {
+        p.drawEllipse(QPointF(13, 11), 4, 4);
+        p.drawArc(QRectF(5, 18, 16, 10), 0, 180 * 16);
+        p.drawArc(QRectF(18, 17, 10, 10), 0, 180 * 16);
+    } else if (name == "calendar") {
+        p.drawRoundedRect(QRectF(6, 8, 20, 18), 3, 3);
+        p.drawLine(QPointF(6, 14), QPointF(26, 14));
+        p.drawLine(QPointF(11, 5), QPointF(11, 10));
+        p.drawLine(QPointF(21, 5), QPointF(21, 10));
+    }
+
+    p.end();
+    return QIcon(pm);
+}
+
+// Libellé avec son icône à gauche
+QWidget *iconLabel(const QString &icon, const QString &text)
+{
+    QWidget *w = new QWidget;
+    w->setStyleSheet("background: transparent;");
+
+    auto *h = new QHBoxLayout(w);
+    h->setContentsMargins(0, 0, 0, 0);
+    h->setSpacing(8);
+
+    QLabel *ic = new QLabel;
+    ic->setPixmap(fieldIcon(icon).pixmap(QSize(20, 20)));
+    ic->setFixedSize(22, 22);
+
+    QLabel *t = new QLabel(text);
+    t->setObjectName("field");
+
+    h->addWidget(ic);
+    h->addWidget(t);
+    h->addStretch();
+    return w;
+}
+
+// Bloc du récapitulatif : un titre petit, puis une valeur en dessous
+QFrame *infoBlock(const QString &title, QLabel *&valueOut)
+{
+    QFrame *block = new QFrame;
+    block->setObjectName("card");
+
+    auto *lay = new QVBoxLayout(block);
+    lay->setContentsMargins(16, 12, 16, 12);
+    lay->setSpacing(6);
+
+    QLabel *t = new QLabel(title);
+    t->setObjectName("field");
+    lay->addWidget(t);
+
+    valueOut = new QLabel;
+    valueOut->setTextFormat(Qt::RichText);
+    valueOut->setWordWrap(true);
+    lay->addWidget(valueOut);
+
+    return block;
 }
 
 } // namespace
@@ -41,144 +128,132 @@ EmpruntsPage::EmpruntsPage(DataStore *store, QWidget *parent)
     root->addWidget(title);
     root->addWidget(sub);
 
-    // ----- Formulaire -----
-    auto *center = new QVBoxLayout;
-    center->setSpacing(14);
-
+    // ----- Carte gauche : formulaire -----
     QFrame *form = new QFrame;
     form->setObjectName("form");
-    form->setFixedWidth(460);
+    form->setFixedSize(CARD_W, CARD_H);
 
     auto *fl = new QVBoxLayout(form);
     fl->setContentsMargins(24, 20, 24, 20);
-    fl->setSpacing(6);
+    fl->setSpacing(8);
 
     QLabel *ft = new QLabel("Nouvel emprunt");
     ft->setObjectName("formTitle");
     fl->addWidget(ft);
-    fl->addSpacing(6);
+    fl->addSpacing(4);
 
-    // Chaque champ a son libellé au-dessus, et une hauteur fixe
-    auto field = [&fl](const QString &label, QWidget *input) {
-        QLabel *l = new QLabel(label);
-        l->setObjectName("field");
-        fl->addWidget(l);
-        input->setFixedHeight(36);
-        fl->addWidget(input);
-    };
+    // Nom et Prénoms : en haut du formulaire
+    fl->addWidget(iconLabel("user", "Nom :"));
+    m_nom = new QLineEdit;
+    m_nom->setPlaceholderText("Ex : Rakotomamonjy");
+    m_nom->setFixedHeight(40);
+    fl->addWidget(m_nom);
 
-    m_category = new QComboBox;
-    field("Catégorie de matériel", m_category);
-
-    m_material = new QComboBox;
-    field("Matériel disponible", m_material);
-
-    m_matricule = new QLineEdit;
-    m_matricule->setPlaceholderText("Ex : ETU001");
-    field("Matricule de l'emprunteur", m_matricule);
+    fl->addWidget(iconLabel("users", "Prénoms :"));
+    m_prenom = new QLineEdit;
+    m_prenom->setPlaceholderText("Ex : Sarah");
+    m_prenom->setFixedHeight(40);
+    fl->addWidget(m_prenom);
 
     m_borrowerStatus = new QLabel;
     m_borrowerStatus->setObjectName("field");
-    m_borrowerStatus->setMinimumHeight(18);
+    m_borrowerStatus->setMinimumHeight(16);
     fl->addWidget(m_borrowerStatus);
 
-    // Nom et prénom côte à côte
-    auto *names = new QHBoxLayout;
-    names->setSpacing(12);
+    // Catégorie de matériel
+    fl->addWidget(iconLabel("box", "Catégorie de matériel"));
+    m_category = new QComboBox;
+    m_category->setFixedHeight(40);
+    fl->addWidget(m_category);
 
-    auto *nomCol = new QVBoxLayout;
-    nomCol->setSpacing(6);
-    QLabel *lNom = new QLabel("Nom");
-    lNom->setObjectName("field");
-    m_nom = new QLineEdit;
-    m_nom->setReadOnly(true);
-    m_nom->setFixedHeight(36);
-    nomCol->addWidget(lNom);
-    nomCol->addWidget(m_nom);
-    names->addLayout(nomCol, 1);
+    // Matériel disponible
+    fl->addWidget(iconLabel("chip", "Matériel disponible"));
+    m_material = new QComboBox;
+    m_material->setFixedHeight(40);
+    fl->addWidget(m_material);
 
-    auto *prenomCol = new QVBoxLayout;
-    prenomCol->setSpacing(6);
-    QLabel *lPrenom = new QLabel("Prénom");
-    lPrenom->setObjectName("field");
-    m_prenom = new QLineEdit;
-    m_prenom->setReadOnly(true);
-    m_prenom->setFixedHeight(36);
-    prenomCol->addWidget(lPrenom);
-    prenomCol->addWidget(m_prenom);
-    names->addLayout(prenomCol, 1);
-
-    fl->addLayout(names);
-    fl->addSpacing(6);
-
-    // Dates côte à côte
+    // Dates côte à côte, chacune avec son icône
     auto *dates = new QHBoxLayout;
     dates->setSpacing(12);
 
     auto *startCol = new QVBoxLayout;
-    startCol->setSpacing(6);
-    QLabel *lStart = new QLabel("Date d'emprunt");
-    lStart->setObjectName("field");
+    startCol->setSpacing(8);
+    startCol->addWidget(iconLabel("calendar", "Date d'emprunt"));
     m_start = new QDateEdit(QDate::currentDate());
     m_start->setCalendarPopup(true);
     m_start->setDisplayFormat("dd/MM/yyyy");
-    m_start->setFixedHeight(36);
-    startCol->addWidget(lStart);
+    m_start->setFixedHeight(40);
     startCol->addWidget(m_start);
     dates->addLayout(startCol, 1);
 
     auto *endCol = new QVBoxLayout;
-    endCol->setSpacing(6);
-    QLabel *lEnd = new QLabel("Date de retour prévue");
-    lEnd->setObjectName("field");
+    endCol->setSpacing(8);
+    endCol->addWidget(iconLabel("calendar", "Date de retour prévue"));
     m_end = new QDateEdit(QDate::currentDate().addDays(7));
     m_end->setCalendarPopup(true);
     m_end->setDisplayFormat("dd/MM/yyyy");
-    m_end->setFixedHeight(36);
-    endCol->addWidget(lEnd);
+    m_end->setFixedHeight(40);
     endCol->addWidget(m_end);
     dates->addLayout(endCol, 1);
 
     fl->addLayout(dates);
-    fl->addSpacing(10);
+    fl->addStretch(1);
 
+    // Bouton pleine largeur, en bas
     QPushButton *ok = new QPushButton("Enregistrer l'emprunt");
     ok->setObjectName("primary");
     ok->setCursor(Qt::PointingHandCursor);
-    ok->setFixedHeight(42);
+    ok->setFixedHeight(44);
     fl->addWidget(ok);
 
-    // ----- Résumé, affiché après un emprunt réussi -----
+    // ----- Carte droite : récapitulatif (caché jusqu'à un emprunt réussi) -----
     m_summary = new QFrame;
     m_summary->setObjectName("summary");
-    m_summary->setFixedWidth(460);
-    m_summary->hide();
+    m_summary->setFixedSize(CARD_W, CARD_H);
 
     auto *sl = new QVBoxLayout(m_summary);
-    sl->setContentsMargins(24, 18, 24, 18);
-    sl->setSpacing(8);
+    sl->setContentsMargins(24, 20, 24, 20);
+    sl->setSpacing(12);
 
-    QLabel *done = new QLabel("✔  Emprunt terminé");
-    done->setObjectName("done");
-    sl->addWidget(done);
+    QLabel *sumTitle = new QLabel("Récapitulatif");
+    sumTitle->setAlignment(Qt::AlignCenter);
+    sumTitle->setStyleSheet("font-size: 22px; font-weight: bold;");
+    sl->addWidget(sumTitle);
+    sl->addSpacing(6);
 
-    m_summaryText = new QLabel;
-    m_summaryText->setTextFormat(Qt::RichText);
-    m_summaryText->setWordWrap(true);
-    sl->addWidget(m_summaryText);
+    sl->addWidget(infoBlock("Matériel", m_sumMaterial));
+    sl->addWidget(infoBlock("Emprunteur", m_sumBorrower));
+    sl->addWidget(infoBlock("Dates", m_sumDates));
 
-    center->addWidget(form, 0, Qt::AlignHCenter);
-    center->addWidget(m_summary, 0, Qt::AlignHCenter);
+    sl->addStretch(1);
+    QPushButton *close = new QPushButton("Fermer");
+    close->setObjectName("secondary");
+    close->setCursor(Qt::PointingHandCursor);
+    close->setFixedHeight(40);
+    sl->addWidget(close);
+    connect(close, &QPushButton::clicked, this, [this] { m_summary->hide(); });
+    m_summary->hide();
+
+    // ----- Disposition : formulaire au centre, récapitulatif à droite après l'emprunt -----
+    auto *cards = new QHBoxLayout;
+    cards->setSpacing(20);
+    cards->addStretch(1);
+    cards->addWidget(form);
+    cards->addWidget(m_summary);
+    cards->addStretch(1);
 
     root->addStretch(1);
-    root->addLayout(center);
+    root->addLayout(cards);
     root->addStretch(1);
 
     // ----- Connexions -----
     connect(m_category, &QComboBox::currentIndexChanged, this, [this](int) {
         fillMaterials(currentCategoryId(), 0);
     });
-    connect(m_matricule, &QLineEdit::textChanged, this, [this](const QString &) {
+    connect(m_nom, &QLineEdit::textChanged, this, [this](const QString &) {
+        updateBorrower();
+    });
+    connect(m_prenom, &QLineEdit::textChanged, this, [this](const QString &) {
         updateBorrower();
     });
     connect(ok, &QPushButton::clicked, this, &EmpruntsPage::onSubmit);
@@ -244,65 +319,80 @@ void EmpruntsPage::prefillMaterial(int materielId)
 
     fillCategories(catId);
     fillMaterials(catId, materielId);
-    m_matricule->setFocus();
+    m_nom->setFocus();
 }
 
 void EmpruntsPage::updateBorrower()
 {
-    const QString matricule = m_matricule->text().trimmed();
+    const QString nom    = m_nom->text().trimmed();
+    const QString prenom = m_prenom->text().trimmed();
 
-    if (matricule.isEmpty()) {
-        m_nom->clear();
-        m_prenom->clear();
+    // Le message n'apparaît qu'une fois les deux champs remplis
+    if (nom.isEmpty() || prenom.isEmpty()) {
         m_borrowerStatus->clear();
         return;
     }
 
-    const auto st = m_store->findStudent(matricule);
+    const auto st = m_store->findStudentByName(nom, prenom);
 
     if (st) {
-        m_nom->setText(st->nom);
-        m_prenom->setText(st->prenom);
-        m_borrowerStatus->setText("✔  Emprunteur inscrit");
+        m_borrowerStatus->setText("✔  Étudiant inscrit (matricule " + st->matricule + ")");
         m_borrowerStatus->setStyleSheet("color: #4ade80; font-size: 11px;");
     } else {
-        m_nom->clear();
-        m_prenom->clear();
-        m_borrowerStatus->setText("L'étudiant n'est pas encore inscrit");
+        m_borrowerStatus->setText("Cet étudiant n'est pas encore inscrit");
         m_borrowerStatus->setStyleSheet("color: #fb923c; font-size: 11px;");
     }
 }
 
+void EmpruntsPage::showSummary(const QString &material, const QString &numeroSerie,
+                               const QString &nomPrenom, const QString &matricule,
+                               const QDate &start, const QDate &end)
+{
+    m_sumMaterial->setText(QString("<b>%1</b><br>N° série : %2").arg(material, numeroSerie));
+    m_sumBorrower->setText(QString("<b>Nom :</b> %1<br><b>Prénoms :</b> %2<br>"
+                                   "<b>Matricule :</b> %3")
+                               .arg(nomPrenom.section(' ', 0, 0),
+                                    nomPrenom.section(' ', 1),
+                                    matricule));
+    m_sumDates->setText(QString("<b>Emprunt :</b> %1<br><b>Retour prévu :</b> %2")
+                            .arg(start.toString("dd/MM/yyyy"), end.toString("dd/MM/yyyy")));
+
+    m_summary->show();
+}
+
 void EmpruntsPage::resetForm()
 {
-    m_matricule->clear();     // efface aussi nom et prénom
+    m_nom->clear();          // efface aussi le message de statut
+    m_prenom->clear();
     fillCategories(0);
     fillMaterials(0, 0);
 }
 
 void EmpruntsPage::onSubmit()
 {
+    // Le récapitulatif disparaît à chaque nouvelle tentative
     m_summary->hide();
 
-    const int catId         = currentCategoryId();
-    const int matId         = currentMaterialId();
-    const QString matricule = m_matricule->text().trimmed();
-    const QDate start       = m_start->date();
-    const QDate end         = m_end->date();
+    const int catId      = currentCategoryId();
+    const int matId      = currentMaterialId();
+    const QString nom    = m_nom->text().trimmed();
+    const QString prenom = m_prenom->text().trimmed();
+    const QDate start    = m_start->date();
+    const QDate end      = m_end->date();
 
-    if (matricule.isEmpty()) {
+    if (nom.isEmpty() || prenom.isEmpty()) {
         QMessageBox::warning(this, "Champs manquants",
-                             "Saisissez le matricule de l'emprunteur.");
+                             "Saisissez le nom et les prénoms de l'emprunteur.");
         return;
     }
 
-    // 1. L'étudiant est-il inscrit ? (contrôle en premier)
-    const auto st = m_store->findStudent(matricule);
+    // 1. L'étudiant est-il inscrit ? Sinon : message, puis page Étudiants
+    const auto st = m_store->findStudentByName(nom, prenom);
     if (!st) {
         QMessageBox::information(this, "Étudiant non inscrit",
-                                 QString("L'étudiant avec le matricule %1 n'est pas encore "
-                                         "inscrit.\n\nVous allez être redirigé vers la page "
-                                         "Étudiants pour l'inscrire.").arg(matricule));
+                                 QString("%1 %2 n'est pas encore inscrit.\n\n"
+                                         "Vous allez être redirigé vers la page Étudiants "
+                                         "pour l'inscrire.").arg(prenom, nom));
         emit navigateToStudents();
         return;
     }
@@ -360,7 +450,7 @@ void EmpruntsPage::onSubmit()
         return;
     }
 
-    // 5. Enregistrement
+    // 5. Enregistrement, puis récapitulatif à droite
     Loan loan;
     loan.materielId       = mat->id;
     loan.emprunteurId     = st->id;
@@ -372,21 +462,8 @@ void EmpruntsPage::onSubmit()
         return;
     }
 
-    showSummary(mat->designation, st->prenom + " " + st->nom, st->matricule, start, end);
+    showSummary(mat->designation, mat->numeroSerie,
+                st->nom + " " + st->prenom, st->matricule, start, end);
     resetForm();
     emit loanCreated(mat->designation);
-}
-
-void EmpruntsPage::showSummary(const QString &material, const QString &who,
-                               const QString &matricule, const QDate &start, const QDate &end)
-{
-    m_summaryText->setText(QString(
-                               "<b>Matériel :</b> %1<br>"
-                               "<b>Emprunteur :</b> %2 (%3)<br>"
-                               "<b>Date d'emprunt :</b> %4<br>"
-                               "<b>Date de retour prévue :</b> %5")
-                               .arg(material, who, matricule,
-                                    start.toString("dd/MM/yyyy"), end.toString("dd/MM/yyyy")));
-
-    m_summary->show();
 }

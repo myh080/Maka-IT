@@ -34,20 +34,22 @@ private:
     int currentCategoryId() const;
     int currentMaterialId() const;
     void updateBorrower();
+    void showSummary(const QString &material, const QString &numeroSerie,
+                     const QString &nomPrenom, const QString &matricule,
+                     const QDate &start, const QDate &end);
     void resetForm();
     void onSubmit();
-    void showSummary(const QString &material, const QString &who,
-                     const QString &matricule, const QDate &start, const QDate &end);
 
     DataStore *m_store = nullptr;
     QComboBox *m_category = nullptr;
     QComboBox *m_material = nullptr;
-    QLineEdit *m_matricule = nullptr;
     QLineEdit *m_nom = nullptr;
     QLineEdit *m_prenom = nullptr;
     QLabel *m_borrowerStatus = nullptr;
     QDateEdit *m_start = nullptr;
     QDateEdit *m_end = nullptr;
     QFrame *m_summary = nullptr;
-    QLabel *m_summaryText = nullptr;
+    QLabel *m_sumMaterial = nullptr;
+    QLabel *m_sumBorrower = nullptr;
+    QLabel *m_sumDates = nullptr;
 };

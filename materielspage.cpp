@@ -316,6 +316,13 @@ QFrame *MaterielsPage::makeCard(const MaterialRow &row, int index)
     statusRow->addSpacing(6);
     statusRow->addWidget(st);
     statusRow->addStretch();
+
+    QPushButton *edit = new QPushButton("Modifier");
+    edit->setObjectName("secondary");
+    edit->setCursor(Qt::PointingHandCursor);
+    edit->setFixedHeight(28);
+    connect(edit, &QPushButton::clicked, this, [this, index] { onEditClicked(index); });
+    statusRow->addWidget(edit);
     lay->addLayout(statusRow);
 
     return card;
@@ -414,18 +421,41 @@ void MaterielsPage::onCardDoubleClicked(int index)
 
 void MaterielsPage::onAddClicked()
 {
-    // « Tous » n'est pas une vraie catégorie : on le retire de la liste proposée
     QList<Category> cats = m_categories;
-    cats.removeFirst();
+    cats.removeFirst();                  // « Tous » n'est pas une vraie catégorie
 
     AddMaterielDialog dlg(cats, this);
     if (dlg.exec() != QDialog::Accepted)
         return;
 
-    if (!m_store->addMaterial(dlg.designation(), dlg.numeroSerie(),
-                              dlg.categoryId(), dlg.photoPath())) {
+    // Numéro de série généré automatiquement selon la catégorie choisie
+    const QString serial = m_store->nextSerialFor(dlg.categoryId());
+
+    if (!m_store->addMaterial(dlg.designation(), serial, dlg.categoryId(), dlg.photoPath())) {
         QMessageBox::warning(this, "Ajout impossible",
-                             "Ce numéro de série existe déjà ou l'enregistrement a échoué.");
+                             "L'enregistrement a échoué. Réessayez.");
+        return;
+    }
+
+    loadCategories();
+}
+
+void MaterielsPage::onEditClicked(int index)
+{
+    if (index < 0 || index >= m_rows.size())
+        return;
+
+    const MaterialRow row = m_rows[index];
+
+    QList<Category> cats = m_categories;
+    cats.removeFirst();
+
+    AddMaterielDialog dlg(cats, this, &row);
+    if (dlg.exec() != QDialog::Accepted)
+        return;
+
+    if (!m_store->updateMaterial(row.id, dlg.designation(), dlg.categoryId())) {
+        QMessageBox::critical(this, "Erreur", "La modification n'a pas pu être enregistrée.");
         return;
     }
 

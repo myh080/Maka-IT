@@ -1,4 +1,5 @@
 #include "retourspage.h"
+#include "theme.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -47,6 +48,32 @@ QIcon searchIcon(const QColor &color)
 
     return QIcon(pm);
 }
+
+// Style du tableau : fond sombre, séparateurs discrets, survol turquoise
+const char *TABLE_QSS = R"CSS(
+QTableWidget {
+    background-color: rgba(10, 10, 14, 150);
+    alternate-background-color: rgba(255, 255, 255, 8);
+    border: none;
+    color: #e5e7eb;
+}
+QTableWidget::item {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 22);
+}
+QTableWidget::item:hover {
+    background-color: rgba(45, 212, 191, 60);
+    color: white;
+}
+QHeaderView::section {
+    background-color: rgba(255, 255, 255, 14);
+    color: #94a3b8;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 30);
+    padding: 8px;
+    font-weight: bold;
+}
+)CSS";
 
 } // namespace
 
@@ -106,35 +133,34 @@ RetoursPage::RetoursPage(DataStore *store, QWidget *parent)
     listTitle->setObjectName("cardTitle");
     ll->addWidget(listTitle);
 
-    m_table = new QTableWidget(0, 9);
-    m_table->setHorizontalHeaderLabels({ "#", "Nom", "Prénom", "Matricule", "Matériel",
-                                        "Date d'emprunt", "Retour prévu", "Statut", "Action" });
+    m_table = new QTableWidget(0, 6);
+    m_table->setHorizontalHeaderLabels({ "#", "Étudiant", "Matériel", "Dates", "Statut", "Action" });
     m_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_table->setSelectionMode(QAbstractItemView::NoSelection);
+    m_table->setShowGrid(false);
     m_table->setAlternatingRowColors(true);
+    m_table->setMouseTracking(true);
     m_table->verticalHeader()->setVisible(false);
-    m_table->verticalHeader()->setDefaultSectionSize(52);
+    m_table->verticalHeader()->setDefaultSectionSize(60);
     m_table->viewport()->setAutoFillBackground(false);
+    m_table->setStyleSheet(TABLE_QSS);
+    Theme::centerTable(m_table);
 
-    // Largeurs : colonnes fixes pour le # et l'action, le matériel prend la place restante
     QHeaderView *hh = m_table->horizontalHeader();
     hh->setStretchLastSection(false);
-    hh->setMinimumSectionSize(50);
+    hh->setMinimumSectionSize(44);
     hh->setSectionResizeMode(0, QHeaderView::Fixed);
     hh->setSectionResizeMode(1, QHeaderView::ResizeToContents);
-    hh->setSectionResizeMode(2, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(2, QHeaderView::Stretch);
     hh->setSectionResizeMode(3, QHeaderView::ResizeToContents);
-    hh->setSectionResizeMode(4, QHeaderView::Stretch);
-    hh->setSectionResizeMode(5, QHeaderView::ResizeToContents);
-    hh->setSectionResizeMode(6, QHeaderView::ResizeToContents);
-    hh->setSectionResizeMode(7, QHeaderView::ResizeToContents);
-    hh->setSectionResizeMode(8, QHeaderView::Fixed);
-    m_table->setColumnWidth(0, 44);
-    m_table->setColumnWidth(8, 130);
+    hh->setSectionResizeMode(4, QHeaderView::ResizeToContents);
+    hh->setSectionResizeMode(5, QHeaderView::Fixed);
+    m_table->setColumnWidth(0, 46);
+    m_table->setColumnWidth(5, 150);
 
     ll->addWidget(m_table, 1);
 
-    // Pied : nombre d'éléments par page et pagination
+    // Pied : éléments par page et pagination
     auto *foot = new QHBoxLayout;
     foot->setSpacing(8);
 
@@ -249,22 +275,44 @@ void RetoursPage::applyFilters()
         const int r = m_table->rowCount();
         m_table->insertRow(r);
 
-        m_table->setItem(r, 0, new QTableWidgetItem(QString::number(i + 1)));
-        m_table->setItem(r, 1, new QTableWidgetItem(l.nom));
-        m_table->setItem(r, 2, new QTableWidgetItem(l.prenom));
-        m_table->setItem(r, 3, new QTableWidgetItem(l.matricule));
-        m_table->setItem(r, 4, new QTableWidgetItem(l.designation + "\n" + l.numeroSerie));
-        m_table->setItem(r, 5, new QTableWidgetItem(l.dateEmprunt.toString("dd/MM/yyyy")));
-        m_table->setItem(r, 6, new QTableWidgetItem(l.dateRetourPrevue.toString("dd/MM/yyyy")));
+        // # (centré)
+        QTableWidgetItem *num = new QTableWidgetItem(QString::number(i + 1));
+        num->setTextAlignment(Qt::AlignCenter);
+        m_table->setItem(r, 0, num);
 
+        // Étudiant : nom et prénom sur une ligne, matricule en dessous
+        m_table->setItem(r, 1, new QTableWidgetItem(
+                                   l.nom + " " + l.prenom + "\n" + l.matricule));
+
+        // Matériel : désignation, puis numéro de série
+        m_table->setItem(r, 2, new QTableWidgetItem(
+                                   l.designation + "\n" + l.numeroSerie));
+
+        // Dates regroupées dans une seule cellule
+        m_table->setItem(r, 3, new QTableWidgetItem(
+                                   "Emprunt : " + l.dateEmprunt.toString("dd/MM/yyyy")
+                                   + "\nRetour prévu : " + l.dateRetourPrevue.toString("dd/MM/yyyy")));
+
+        // Statut
         QTableWidgetItem *statut = new QTableWidgetItem(
             late ? QString("En retard de %1 j").arg(lateDays) : QString("En cours"));
         statut->setForeground(late ? QColor("#f87171") : QColor("#93c5fd"));
-        m_table->setItem(r, 7, statut);
+        statut->setTextAlignment(Qt::AlignCenter);
+        m_table->setItem(r, 4, statut);
 
+        // Action : bouton de taille fixe, centré dans la cellule
         QPushButton *btn = new QPushButton("Retourner");
         btn->setObjectName("primary");
         btn->setCursor(Qt::PointingHandCursor);
+        btn->setFixedSize(116, 36);
+        btn->setStyleSheet("padding: 4px 8px;");
+
+        QWidget *cell = new QWidget;
+        cell->setStyleSheet("background: transparent;");
+        auto *cl = new QHBoxLayout(cell);
+        cl->setContentsMargins(4, 0, 4, 0);
+        cl->addWidget(btn, 0, Qt::AlignCenter);
+        m_table->setCellWidget(r, 5, cell);
 
         const int id = l.id;
         const QString designation = l.designation;
@@ -272,7 +320,6 @@ void RetoursPage::applyFilters()
         connect(btn, &QPushButton::clicked, this, [this, id, designation, who] {
             returnLoan(id, designation, who);
         });
-        m_table->setCellWidget(r, 8, btn);
     }
 
     m_pageLabel->setText(QString("Page %1 / %2").arg(m_page + 1).arg(pages));

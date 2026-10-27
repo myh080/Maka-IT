@@ -1,23 +1,23 @@
-#ifndef THEME_H
-#define THEME_H
-
 #pragma once
 
 #include <QColor>
 
+class QTableWidget;
+
 namespace Theme {
 
-void setDark(bool dark);     // applique le thème à toute l'application
+void setDark(bool dark);
 bool isDark();
 
-QColor text();               // texte principal
-QColor muted();              // texte secondaire
-QColor accent();             // couleur d'accent
-QColor background();         // fond uni (contour des points du graphique)
-QColor chartLine();          // courbe et points
-QColor chartGrid();          // grille et bordure des graphiques
-QColor tooltipBg();          // bulle d'information du graphique
+QColor text();
+QColor muted();
+QColor accent();
+QColor background();
+QColor chartLine();
+QColor chartGrid();
+QColor tooltipBg();
 
-}
+// Centre le contenu de toutes les cellules et des en-têtes d'un tableau
+void centerTable(QTableWidget *table);
 
-#endif // THEME_H
+} // namespace Theme

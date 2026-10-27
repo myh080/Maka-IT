@@ -34,6 +34,7 @@ private:
     void onCardDoubleClicked(int index);
     void onCardContextMenu(int index, const QPoint &globalPos);
     void onAddClicked();
+    void onEditClicked(int index);
 
     DataStore *m_store = nullptr;
     QList<Category> m_categories;

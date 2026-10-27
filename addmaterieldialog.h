@@ -13,10 +13,11 @@ class AddMaterielDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddMaterielDialog(const QList<Category> &categories, QWidget *parent = nullptr);
+    // Si « edit » est fourni, le formulaire est pré-rempli pour une modification
+    explicit AddMaterielDialog(const QList<Category> &categories, QWidget *parent = nullptr,
+                               const MaterialRow *edit = nullptr);
 
     QString designation() const;
-    QString numeroSerie() const;
     int categoryId() const;
     QString photoPath() const;
 
@@ -26,7 +27,6 @@ private:
 
     QLabel *m_preview = nullptr;
     QLineEdit *m_designation = nullptr;
-    QLineEdit *m_serial = nullptr;
     QComboBox *m_cat = nullptr;
     QString m_photo;
 };

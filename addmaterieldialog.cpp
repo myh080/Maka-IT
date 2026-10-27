@@ -10,20 +10,28 @@
 #include <QPixmap>
 #include <QMessageBox>
 
-AddMaterielDialog::AddMaterielDialog(const QList<Category> &categories, QWidget *parent)
+AddMaterielDialog::AddMaterielDialog(const QList<Category> &categories, QWidget *parent,
+                                     const MaterialRow *edit)
     : QDialog(parent)
 {
-    setWindowTitle("Nouveau matériel");
+    setWindowTitle(edit ? "Modifier le matériel" : "Nouveau matériel");
     setModal(true);
     setMinimumWidth(380);
 
     auto *root = new QVBoxLayout(this);
     root->setContentsMargins(22, 20, 22, 20);
-    root->setSpacing(12);
+    root->setSpacing(10);
 
-    QLabel *title = new QLabel("Ajouter un matériel");
+    QLabel *title = new QLabel(edit ? "Modifier le matériel" : "Ajouter un matériel");
     title->setObjectName("dlgTitle");
     root->addWidget(title);
+
+    if (edit) {
+        // Affiche le numéro de série, non modifiable
+        QLabel *serial = new QLabel("N° série : " + edit->numeroSerie);
+        serial->setObjectName("matSerial");
+        root->addWidget(serial);
+    }
 
     m_preview = new QLabel("Aucune photo");
     m_preview->setObjectName("preview");
@@ -44,13 +52,6 @@ AddMaterielDialog::AddMaterielDialog(const QList<Category> &categories, QWidget 
     m_designation->setPlaceholderText("Ex : Arduino Uno R3");
     root->addWidget(m_designation);
 
-    QLabel *lSer = new QLabel("Numéro de série");
-    lSer->setObjectName("field");
-    root->addWidget(lSer);
-    m_serial = new QLineEdit;
-    m_serial->setPlaceholderText("Ex : A0001-00999");
-    root->addWidget(m_serial);
-
     QLabel *lCat = new QLabel("Catégorie");
     lCat->setObjectName("field");
     root->addWidget(lCat);
@@ -59,6 +60,19 @@ AddMaterielDialog::AddMaterielDialog(const QList<Category> &categories, QWidget 
         m_cat->addItem(c.libelle, c.id);
     root->addWidget(m_cat);
 
+    if (edit) {
+        m_designation->setText(edit->designation);
+        const int idx = m_cat->findData(0);   // position par défaut
+        Q_UNUSED(idx);
+        // Sélectionne la catégorie actuelle du matériel
+        for (int i = 0; i < m_cat->count(); ++i) {
+            if (m_cat->itemText(i) == edit->libelle) {
+                m_cat->setCurrentIndex(i);
+                break;
+            }
+        }
+    }
+
     auto *buttons = new QHBoxLayout;
     buttons->addStretch();
 
@@ -66,7 +80,7 @@ AddMaterielDialog::AddMaterielDialog(const QList<Category> &categories, QWidget 
     cancel->setObjectName("secondary");
     cancel->setCursor(Qt::PointingHandCursor);
 
-    QPushButton *ok = new QPushButton("Enregistrer");
+    QPushButton *ok = new QPushButton(edit ? "Enregistrer" : "Ajouter");
     ok->setObjectName("primary");
     ok->setCursor(Qt::PointingHandCursor);
 
@@ -83,11 +97,6 @@ QString AddMaterielDialog::designation() const
     return m_designation->text().trimmed();
 }
 
-QString AddMaterielDialog::numeroSerie() const
-{
-    return m_serial->text().trimmed();
-}
-
 int AddMaterielDialog::categoryId() const
 {
     return m_cat->currentData().toInt();
@@ -100,9 +109,8 @@ QString AddMaterielDialog::photoPath() const
 
 void AddMaterielDialog::validateAndAccept()
 {
-    if (designation().isEmpty() || numeroSerie().isEmpty()) {
-        QMessageBox::warning(this, "Champs requis",
-                             "Veuillez saisir la désignation et le numéro de série.");
+    if (designation().isEmpty()) {
+        QMessageBox::warning(this, "Champ requis", "Veuillez saisir la désignation du matériel.");
         return;
     }
     accept();

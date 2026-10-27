@@ -4,6 +4,11 @@
 #include <QString>
 #include <QList>
 #include <QPair>
+#include <QStyledItemDelegate>
+#include <QStyleOptionViewItem>
+#include <QModelIndex>
+#include <QTableWidget>
+#include <QHeaderView>
 
 namespace {
 
@@ -133,6 +138,20 @@ QWidget#gridHost { background: transparent; }
     return s;
 }
 
+// Délégué qui force l'alignement centré de chaque cellule
+class CenterDelegate : public QStyledItemDelegate
+{
+public:
+    explicit CenterDelegate(QObject *parent = nullptr) : QStyledItemDelegate(parent) {}
+
+protected:
+    void initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const override
+    {
+        QStyledItemDelegate::initStyleOption(option, index);
+        option->displayAlignment = Qt::AlignCenter;
+    }
+};
+
 } // namespace
 
 namespace Theme {
@@ -152,5 +171,14 @@ QColor background() { return g_dark ? QColor(0, 0, 0)   : QColor(255, 255, 255);
 QColor chartLine()  { return g_dark ? QColor(255, 255, 255) : QColor("#0f172a"); }
 QColor chartGrid()  { return g_dark ? QColor(255, 255, 255, 35) : QColor(15, 23, 42, 45); }
 QColor tooltipBg()  { return g_dark ? QColor(15, 15, 15, 230) : QColor(255, 255, 255, 245); }
+
+void centerTable(QTableWidget *table)
+{
+    if (!table)
+        return;
+
+    table->setItemDelegate(new CenterDelegate(table));
+    table->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
+}
 
 } // namespace Theme

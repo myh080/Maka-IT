@@ -1,10 +1,12 @@
 #include "studentspage.h"
+#include "theme.h"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QLabel>
 #include <QLineEdit>
+#include <QComboBox>
 #include <QPushButton>
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -20,6 +22,7 @@
 #include <QPen>
 #include <QPointF>
 #include <QColor>
+#include <algorithm>
 
 namespace {
 
@@ -125,7 +128,7 @@ StudentsPage::StudentsPage(DataStore *store, QWidget *parent)
     title->setObjectName("pageTitle");
     root->addWidget(title);
 
-    // ----- Carte : recherche et bouton d'ajout sur la même ligne -----
+    // ----- Carte : recherche et bouton d'ajout -----
     QFrame *searchCard = new QFrame;
     searchCard->setObjectName("card");
     auto *sl = new QHBoxLayout(searchCard);
@@ -152,7 +155,7 @@ StudentsPage::StudentsPage(DataStore *store, QWidget *parent)
 
     root->addWidget(searchCard);
 
-    // ----- Carte : liste -----
+    // ----- Carte : liste et pagination -----
     QFrame *listCard = new QFrame;
     listCard->setObjectName("card");
     auto *ll = new QVBoxLayout(listCard);
@@ -175,6 +178,8 @@ StudentsPage::StudentsPage(DataStore *store, QWidget *parent)
     m_table->verticalHeader()->setVisible(false);
     m_table->verticalHeader()->setDefaultSectionSize(44);
     m_table->viewport()->setAutoFillBackground(false);
+    Theme::centerTable(m_table);
+
 
     QHeaderView *hh = m_table->horizontalHeader();
     hh->setStretchLastSection(false);
@@ -189,11 +194,55 @@ StudentsPage::StudentsPage(DataStore *store, QWidget *parent)
     m_table->setColumnWidth(5, 120);
 
     ll->addWidget(m_table, 1);
+
+    // Pied : éléments par page et pagination
+    auto *foot = new QHBoxLayout;
+    foot->setSpacing(8);
+
+    foot->addWidget(new QLabel("Afficher"));
+    m_perPage = new QComboBox;
+    m_perPage->addItem("5", 5);
+    m_perPage->addItem("10", 10);
+    m_perPage->addItem("20", 20);
+    m_perPage->setFixedWidth(80);
+    foot->addWidget(m_perPage);
+    foot->addWidget(new QLabel("éléments par page"));
+    foot->addStretch();
+
+    m_prev = new QPushButton("‹");
+    m_prev->setFixedSize(34, 34);
+    m_prev->setCursor(Qt::PointingHandCursor);
+
+    m_pageLabel = new QLabel;
+    m_pageLabel->setAlignment(Qt::AlignCenter);
+
+    m_next = new QPushButton("›");
+    m_next->setFixedSize(34, 34);
+    m_next->setCursor(Qt::PointingHandCursor);
+
+    foot->addWidget(m_prev);
+    foot->addWidget(m_pageLabel);
+    foot->addWidget(m_next);
+    ll->addLayout(foot);
+
     root->addWidget(listCard, 1);
 
     // ----- Connexions -----
     connect(m_search, &QLineEdit::textChanged, this, [this](const QString &) {
+        m_page = 0;
         reload();
+    });
+    connect(m_perPage, &QComboBox::currentIndexChanged, this, [this](int) {
+        m_page = 0;
+        applyPage();
+    });
+    connect(m_prev, &QPushButton::clicked, this, [this] {
+        --m_page;
+        applyPage();
+    });
+    connect(m_next, &QPushButton::clicked, this, [this] {
+        ++m_page;
+        applyPage();
     });
     connect(addBtn, &QPushButton::clicked, this, &StudentsPage::onAdd);
 
@@ -208,11 +257,24 @@ void StudentsPage::showEvent(QShowEvent *event)
 
 void StudentsPage::reload()
 {
-    const QList<Student> list = m_store->listStudents(m_search->text());
+    m_all = m_store->listStudents(m_search->text());
+    applyPage();
+}
+
+void StudentsPage::applyPage()
+{
+    const int perPage = m_perPage->currentData().toInt();
+    const int total = static_cast<int>(m_all.size());
+    const int pages = std::max(1, (total + perPage - 1) / perPage);
+    m_page = std::clamp(m_page, 0, pages - 1);
 
     m_table->setRowCount(0);
-    for (int i = 0; i < list.size(); ++i) {
-        const Student s = list[i];
+
+    const int start = m_page * perPage;
+    const int end = std::min(total, start + perPage);
+
+    for (int i = start; i < end; ++i) {
+        const Student s = m_all[i];
         const int row = m_table->rowCount();
         m_table->insertRow(row);
 
@@ -226,11 +288,21 @@ void StudentsPage::reload()
         QPushButton *btn = new QPushButton("Modifier");
         btn->setObjectName("secondary");
         btn->setCursor(Qt::PointingHandCursor);
+        btn->setFixedSize(100, 32);
         connect(btn, &QPushButton::clicked, this, [this, s] { onEdit(s); });
-        m_table->setCellWidget(row, 5, btn);
+
+        QWidget *cell = new QWidget;
+        cell->setStyleSheet("background: transparent;");
+        auto *cl = new QHBoxLayout(cell);
+        cl->setContentsMargins(4, 0, 4, 0);
+        cl->addWidget(btn, 0, Qt::AlignCenter);
+        m_table->setCellWidget(row, 5, cell);
     }
 
-    m_count->setText(QString("%1 étudiant(s)").arg(list.size()));
+    m_count->setText(QString("%1 étudiant(s)").arg(total));
+    m_pageLabel->setText(QString("Page %1 / %2").arg(m_page + 1).arg(pages));
+    m_prev->setEnabled(m_page > 0);
+    m_next->setEnabled(m_page < pages - 1);
 }
 
 void StudentsPage::onAdd()
@@ -245,7 +317,6 @@ void StudentsPage::onAdd()
         return;
     }
 
-    // Reporté : on ne supprime pas le bouton qui vient d'émettre le signal
     QTimer::singleShot(0, this, &StudentsPage::reload);
 }
 

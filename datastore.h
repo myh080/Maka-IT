@@ -87,6 +87,7 @@ public:
     ~DataStore();
 
     std::optional<Student>  findStudent(const QString &matricule) const;
+    std::optional<Student> findStudentByName(const QString &nom, const QString &prenom) const;
     std::optional<Material> findMaterial(const QString &key) const;
     std::optional<Material> findMaterialById(int materielId) const;
     int categoryIdOfMaterial(int materielId) const;
@@ -103,7 +104,11 @@ public:
     QList<Category>    listCategories() const;
     QList<MaterialRow> listMaterials(int categoryId, const QString &search) const;
     bool addMaterial(const QString &designation, const QString &numeroSerie,
-                     int categoryId, const QString &photo);
+    int categoryId, const QString &photo);
+
+    QString nextSerialFor(int categoryId) const;
+    bool updateMaterial(int materielId, const QString &designation, int categoryId);
+
     bool repairMaterial(int materielId);
     bool setMaterialState(int materielId, const QString &etat);
 

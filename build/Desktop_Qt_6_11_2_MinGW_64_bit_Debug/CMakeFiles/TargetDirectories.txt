@@ -1,5 +1,0 @@
-H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/Maka_IT.dir
-H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/edit_cache.dir
-H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/rebuild_cache.dir
-H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/Maka_IT_autogen_timestamp_deps.dir
-H:/Qt project/Maka_IT/build/Desktop_Qt_6_11_2_MinGW_64_bit_Debug/CMakeFiles/Maka_IT_autogen.dir

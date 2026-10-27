@@ -56,7 +56,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     Theme::setDark(true);
     ui->setupUi(this);
-    setWindowTitle("Gestion des emprunts de matériels informatiques");
+    setWindowTitle("Maka IT");
+        setWindowIcon(QIcon(loadTinted("departement-it.png", QColor(255, 255, 255))));
 
     // Taille minimale de la fenêtre : plus petite que celle du .ui (1100 x 700)
     setMinimumSize(800, 560);
